@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+    <changeSet id="20181202-1-users-table" author="Rumyana Krumova">
+        <createTable tableName="person">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar"/>
+            <column name="age" type="int"/>
+            <column name="gender" type="varchar"/>
+            <column name="address" type="varchar"/>
+        </createTable>
+        <createTable tableName="employee">
+            <column name="person_id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="salary" type="real"/>
+            <column name="start_date" type="timestamp"/>
+            <column name="end_date" type="timestamp"/>
+            <column name="manager" type="bigint"/>
+        </createTable>
+        <createTable tableName="user_role">
+            <column name="user_id" type="bigint">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="role" type="varchar"/>
+        </createTable>
+        <createTable tableName="grade">
+            <column type="bigint" name="id" autoIncrement="true"/>
+            <column type="varchar" name="name"/>
+        </createTable>
+        <createTable tableName="skill">
+            <column type="bigint" name="id" autoIncrement="true"/>
+            <column type="varchar" name="name"/>
+        </createTable>
+        <createTable tableName="department">
+            <column type="bigint" name="id" autoIncrement="true"/>
+            <column type="varchar" name="name"/>
+        </createTable>
+        <createTable tableName="position">
+            <column type="bigint" name="id" autoIncrement="true"/>
+            <column type="bigint" name="department"/>
+            <column type="bigint" name="employee"/>
+        </createTable>
+        <createTable tableName="project">
+            <column type="bigint" name="id" autoIncrement="true"/>
+            <column type="bigint" name="name"/>
+            <column name="start_date" type="timestamp"/>
+            <column name="end_date" type="timestamp"/>
+        </createTable>
+        <createTable tableName="absence">
+            <column type="bigint" name="id" autoIncrement="true"/>
+            <column type="timestamp" name="public holiday"/>
+            <column name="annual leave" type="timestamp"/>
+            <column name="special leave" type="timestamp"/>
+        </createTable>
+    </changeSet>
+</databaseChangeLog>
