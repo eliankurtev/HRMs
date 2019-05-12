@@ -52,7 +52,7 @@
             <column name="start_date" type="timestamp"/>
             <column name="end_date" type="timestamp"/>
         </createTable>
-        <createTable tableName="absence">
+        <c tableName="absence">
             <column type="bigint" name="id" autoIncrement="true"/>
             <column type="timestamp" name="public holiday"/>
             <column name="annual leave" type="timestamp"/>
