@@ -9,19 +9,37 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="name" type="varchar"/>
-            <column name="age" type="int"/>
+            <column name="firstName" type="varchar"/>
+            <column name="middleName" type="varchar"/>
+            <column name="lastName" type="varchar"/>
             <column name="gender" type="varchar"/>
+            <column name="area" type="varchar"/>
+            <column name="city" type="varchar"/>
             <column name="address" type="varchar"/>
         </createTable>
         <createTable tableName="employee">
             <column name="person_id" type="bigint">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="salary" type="real"/>
+            <column name="email" type="varchar"/>
             <column name="start_date" type="timestamp"/>
             <column name="end_date" type="timestamp"/>
+            <column name="photo" type="varchar"/>
+            <column name="vacationDays" type="int"/>
+            <column name="jobNumber" type="int"/>
+            <column name="workingHours" type="int"/>
+            <column name="workingDays" type="int"/>
             <column name="manager" type="bigint"/>
+        </createTable>
+        <createTable tableName="company">
+            <column name="eik" type="smallint" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar"/>
+            <column name="area" type="varchar"/>
+            <column name="city" type="varchar"/>
+            <column name="address" type="varchar"/>
+            <column name="manager_id" type="bigint"/>
         </createTable>
         <createTable tableName="user_role">
             <column name="user_id" type="bigint">
@@ -45,14 +63,15 @@
             <column type="bigint" name="id" autoIncrement="true"/>
             <column type="bigint" name="department"/>
             <column type="bigint" name="employee"/>
+            <column type="int" name="jobID"/>
         </createTable>
         <createTable tableName="project">
             <column type="bigint" name="id" autoIncrement="true"/>
-            <column type="bigint" name="name"/>
+            <column type="varchar" name="name"/>
             <column name="start_date" type="timestamp"/>
             <column name="end_date" type="timestamp"/>
         </createTable>
-        <c tableName="absence">
+        <createTable tableName="absence">
             <column type="bigint" name="id" autoIncrement="true"/>
             <column type="timestamp" name="public holiday"/>
             <column name="annual leave" type="timestamp"/>
