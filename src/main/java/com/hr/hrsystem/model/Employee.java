@@ -3,8 +3,7 @@ package com.hr.hrsystem.model;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
+import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -13,6 +12,8 @@ import java.time.LocalDate;
 @Data
 public class Employee {
     //TODO Hierarchy id - remember
+    @Id
+    private Long id;
 
     @Column
     @NotNull
@@ -44,6 +45,11 @@ public class Employee {
     @Column
     @NotNull
     private Integer workingDays;
+
+    @OneToOne
+    @JoinColumn(name = "id")
+    @MapsId
+    private Person person;
 
     //TODO: Make the fk relations
     // Position

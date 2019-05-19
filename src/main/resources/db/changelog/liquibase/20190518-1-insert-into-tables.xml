@@ -12,8 +12,7 @@
             <column name="name" value="Regular"/>
             <column name="name" value="Expert"/>
         </insert>
-        <insert schemaName="public"
-                tableName="skill">
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="Java"/>
             <column name="name" value="C#"/>
             <column name="name" value="English"/>
@@ -46,6 +45,7 @@
         </insert>
         <insert schemaName="public"
                 tableName="employee">
+            <column name="email" value="peshkata@peshev.com"/>
             <column name="email" value="peshkata@peshev.com"/>
             <column name="vacationDays" value="20"/>
             <column name="jobNumber" value="66666666"/>

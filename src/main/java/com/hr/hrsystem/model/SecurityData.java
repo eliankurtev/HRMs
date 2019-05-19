@@ -22,7 +22,7 @@ public class SecurityData {
 
     @Column
     @Length(max = 9)
-    private Integer idNumber;
+    private Short idNumber;
 
     @Column
     private LocalDate issuedDate;

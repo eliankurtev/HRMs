@@ -6,8 +6,8 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
-@MappedSuperclass
-public abstract class Person {
+@Entity
+public class Person {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Long id;
@@ -36,4 +36,7 @@ public abstract class Person {
 
     @Column
     private String address;
+
+    @OneToOne(mappedBy = "person")
+    private Employee employee;
 }

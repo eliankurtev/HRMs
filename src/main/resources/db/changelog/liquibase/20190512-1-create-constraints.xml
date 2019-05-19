@@ -22,25 +22,9 @@
                                  referencedColumnNames="id"
                                  referencedTableName="person"/>
     </changeSet>
+
     <changeSet author="Rumyana Krumova" id="20190512-3">
-        <createTable tableName="employee_absence">
-            <column type="bigint" name="employee_id" />
-            <column type="bigint" name="absence_id"/>
-        </createTable>
-        <addForeignKeyConstraint baseColumnNames="employee_id"
-                                 baseTableName="employee_absence"
-                                 constraintName="fk_employee_absence_e"
-                                 deferrable="true"
-                                 initiallyDeferred="true"
-                                 referencedColumnNames="id"
-                                 referencedTableName="employee"/>
-        <addForeignKeyConstraint baseColumnNames="absence_id"
-                                 baseTableName="employee_absence"
-                                 constraintName="fk_employee_absence_a"
-                                 deferrable="true"
-                                 initiallyDeferred="true"
-                                 referencedColumnNames="id"
-                                 referencedTableName="absence"/>
+
     </changeSet>
     <changeSet author="Rumyana Krumova" id="20190512-4">
         <createTable tableName="employee_grade">
@@ -103,47 +87,36 @@
                                  referencedTableName="position"/>
     </changeSet>
     <changeSet author="Rumyana Krumova" id="20190512-7">
-        <createTable tableName="employee_position">
+        <createTable tableName="employee_project">
             <column type="bigint" name="employee_id" />
-            <column type="bigint" name="position_id"/>
+            <column type="bigint" name="project_id"/>
         </createTable>
         <addForeignKeyConstraint baseColumnNames="employee_id"
-                                 baseTableName="employee_position"
-                                 constraintName="fk_employee_position_e"
+                                 baseTableName="employee_project"
+                                 constraintName="fk_employee_project_e"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="employee"/>
-        <addForeignKeyConstraint baseColumnNames="position_id"
-                                 baseTableName="employee_position"
-                                 constraintName="fk_employee_position_a"
-                                 deferrable="true"
-                                 initiallyDeferred="true"
-                                 referencedColumnNames="id"
-                                 referencedTableName="position"/>
-    </changeSet>
-    <changeSet author="Rumyana Krumova" id="20190512-8">
-        <createTable tableName="project_absence">
-            <column type="bigint" name="project_id" />
-            <column type="bigint" name="absence_id"/>
-        </createTable>
         <addForeignKeyConstraint baseColumnNames="project_id"
-                                 baseTableName="project_absence"
-                                 constraintName="fk_project_absence_e"
+                                 baseTableName="employee_project"
+                                 constraintName="fk_employee_project_a"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
                                  referencedTableName="project"/>
-        <addForeignKeyConstraint baseColumnNames="absence_id"
-                                 baseTableName="project_absence"
-                                 constraintName="fk_project_absence_a"
+    </changeSet>
+    <changeSet author="Rumyana Krumova" id="20190512-8">
+        <addForeignKeyConstraint baseColumnNames="security_data_id"
+                                 baseTableName="employee"
+                                 constraintName="fk_employee_security_data_e"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
-                                 referencedTableName="absence"/>
+                                 referencedTableName="security_data"/>
     </changeSet>
     <changeSet author="Rumyana Krumova" id="20190512-9">
-        <createTable tableName="project_absence">
+        <createTable tableName="project_grade">
             <column type="bigint" name="project_id" />
             <column type="bigint" name="grade_id"/>
         </createTable>
@@ -155,7 +128,7 @@
                                  referencedColumnNames="id"
                                  referencedTableName="grade"/>
         <addForeignKeyConstraint baseColumnNames="project_id"
-                                 baseTableName="project_absence"
+                                 baseTableName="project_grade"
                                  constraintName="fk_project_grade_a"
                                  deferrable="true"
                                  initiallyDeferred="true"
