@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
@@ -21,5 +22,27 @@ public class Project {
     @Column
     private LocalDate endDate;
 
-    //TODO: relations
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "project_skills",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+    )
+    List<Skill> skills;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "project_grade",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "grade_id") }
+    )
+    List<Grade> grades;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "project_position",
+            joinColumns = { @JoinColumn(name = "project_id") },
+            inverseJoinColumns = { @JoinColumn(name = "position_id") }
+    )
+    List<Position> positions;
 }

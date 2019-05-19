@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,6 +18,15 @@ public class Position {
     @Length(max = 8)
     //НКПИД
     private Short jobID;
-    //TODO: Relations
+
+    @ManyToMany(mappedBy = "positions")
+    private List<Employee> employees;
+
+    @ManyToMany(mappedBy = "positions")
+    private List<Project> projects;
+
+    @ManyToOne
+    @JoinColumn(name="department_id", nullable=false)
+    private Department department;
 
 }

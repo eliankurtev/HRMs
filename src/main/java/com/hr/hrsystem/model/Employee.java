@@ -7,11 +7,11 @@ import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Data
 public class Employee {
-    //TODO Hierarchy id - remember
     @Id
     private Long id;
 
@@ -51,8 +51,24 @@ public class Employee {
     @MapsId
     private Person person;
 
-    //TODO: Make the fk relations
-    // Position
-    // Skills
+    @OneToOne
+    @JoinColumn(name = "grade_id")
+    private Grade grade;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "employee_position",
+            joinColumns = { @JoinColumn(name = "employee_id") },
+            inverseJoinColumns = { @JoinColumn(name = "position_id") }
+    )
+    List<Position> positions;
+
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(
+            name = "employee_skills",
+            joinColumns = { @JoinColumn(name = "employee_id") },
+            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+    )
+    List<Skill> skills;
 
 }
