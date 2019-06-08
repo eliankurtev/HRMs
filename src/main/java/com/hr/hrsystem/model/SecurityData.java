@@ -4,13 +4,11 @@ package com.hr.hrsystem.model;
 import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Data
+@Entity
 public class SecurityData {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

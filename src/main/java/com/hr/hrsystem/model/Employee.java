@@ -34,7 +34,7 @@ public class Employee {
 
     @Column
     @NotNull
-    @Length(max = 8)
+    @Length(max = 9)
     private Integer jobNumber;
 
     // 4/6/8
@@ -47,7 +47,7 @@ public class Employee {
     private Integer workingDays;
 
     @OneToOne
-    @JoinColumn(name = "id")
+    @JoinColumn(name = "person_id")
     @MapsId
     private Person person;
 

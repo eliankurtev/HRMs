@@ -13,15 +13,6 @@
                                  referencedColumnNames="id"
                                  referencedTableName="person"/>
     </changeSet>
-    <changeSet author="Rumyana Krumova" id="20190512-2">
-        <addForeignKeyConstraint baseColumnNames="user_id"
-                                 baseTableName="role"
-                                 constraintName="fk_role_person"
-                                 deferrable="true"
-                                 initiallyDeferred="true"
-                                 referencedColumnNames="id"
-                                 referencedTableName="person"/>
-    </changeSet>
 
     <changeSet author="Rumyana Krumova" id="20190512-3">
 
@@ -31,13 +22,6 @@
             <column type="bigint" name="employee_id" />
             <column type="bigint" name="grade_id"/>
         </createTable>
-        <addForeignKeyConstraint baseColumnNames="employee_id"
-                                 baseTableName="employee_absence"
-                                 constraintName="fk_employee_absence_e"
-                                 deferrable="true"
-                                 initiallyDeferred="true"
-                                 referencedColumnNames="id"
-                                 referencedTableName="employee"/>
         <addForeignKeyConstraint baseColumnNames="grade_id"
                                  baseTableName="employee_grade"
                                  constraintName="fk_employee_grade_a"
@@ -56,7 +40,7 @@
                                  constraintName="fk_employee_skill_e"
                                  deferrable="true"
                                  initiallyDeferred="true"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="person_id"
                                  referencedTableName="employee"/>
         <addForeignKeyConstraint baseColumnNames="skill_id"
                                  baseTableName="employee_skill"
@@ -76,7 +60,7 @@
                                  constraintName="fk_employee_position_e"
                                  deferrable="true"
                                  initiallyDeferred="true"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="person_id"
                                  referencedTableName="employee"/>
         <addForeignKeyConstraint baseColumnNames="position_id"
                                  baseTableName="employee_position"
@@ -96,7 +80,7 @@
                                  constraintName="fk_employee_project_e"
                                  deferrable="true"
                                  initiallyDeferred="true"
-                                 referencedColumnNames="id"
+                                 referencedColumnNames="person_id"
                                  referencedTableName="employee"/>
         <addForeignKeyConstraint baseColumnNames="project_id"
                                  baseTableName="employee_project"

@@ -42,10 +42,14 @@
             <column name="area" value="Kyustendil"/>
             <column name="city" value="Kyustendil"/>
             <column name="address" value="Dupnishko shose №18"/>
+            <column name="username" value="hr"/>
+            <column name="password" value="hr"/>
         </insert>
+    </changeSet>
+    <changeSet author="Rumyana Krumova" id="20190608-1">
         <insert schemaName="public"
                 tableName="employee">
-            <column name="email" value="peshkata@peshev.com"/>
+            <column name="person_id" value="1"/>
             <column name="email" value="peshkata@peshev.com"/>
             <column name="vacationDays" value="20"/>
             <column name="jobNumber" value="66666666"/>
@@ -54,7 +58,7 @@
         </insert>
         <insert schemaName="public"
                 tableName="company">
-            <column name="eik" value="55555555"/>
+            <column name="eik" value="5555"/>
             <column name="name" value="Zatvoreno EOOD"/>
             <column name="area" value="Kyustendil"/>
             <column name="city" value="Kyustendil"/>
