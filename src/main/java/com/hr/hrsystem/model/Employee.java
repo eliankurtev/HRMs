@@ -33,17 +33,17 @@ public class Employee {
     private Integer vacationDays;
 
     @Column
-    @NotNull
+//    @NotNull
     @Length(max = 9)
     private Integer jobNumber;
 
     // 4/6/8
     @Column
-    @NotNull
+//    @NotNull
     private Integer workingHours;
 
     @Column
-    @NotNull
+//    @NotNull
     private Integer workingDays;
 
     @OneToOne

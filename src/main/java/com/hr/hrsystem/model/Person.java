@@ -13,15 +13,15 @@ public class Person {
     private Long id;
 
     @Column
-    @NotNull
+//    @NotNull
     private String firstName;
 
     @Column
-    @NotNull
+//    @NotNull
     private String middleName;
 
     @Column
-    @NotNull
+//    @NotNull
     private String lastName;
 
     @Column
@@ -36,6 +36,12 @@ public class Person {
 
     @Column
     private String address;
+
+    @Column
+    private String username;
+
+    @Column
+    private String password;
 
     @OneToOne(mappedBy = "person")
     private Employee employee;
