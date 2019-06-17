@@ -1,6 +1,8 @@
 package com.hr.hrsystem.model;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -9,10 +11,11 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
 
-@Entity
 @Data
+@Entity
 @Table(name = "employee")
-public class Employee {
+@EqualsAndHashCode(callSuper = true)
+public class Employee extends Person {
     @Id
     private Long id;
 
@@ -38,7 +41,6 @@ public class Employee {
     @Length(max = 9)
     private Integer jobNumber;
 
-    // 4/6/8
     @Column(name = "working_hours")
     @NotNull
     private Integer workingHours;
@@ -56,20 +58,36 @@ public class Employee {
     @JoinColumn(name = "grade_id")
     private Grade grade;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @OneToOne
+    @JoinColumn(name = "security_data_id")
+    private SecurityData securityData;
+
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "employee_position",
-            joinColumns = { @JoinColumn(name = "employee_id") },
-            inverseJoinColumns = { @JoinColumn(name = "position_id") }
+            joinColumns = {@JoinColumn(name = "employee_id")},
+            inverseJoinColumns = {@JoinColumn(name = "position_id")}
     )
     List<Position> positions;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "employee_skill",
-            joinColumns = { @JoinColumn(name = "employee_id") },
-            inverseJoinColumns = { @JoinColumn(name = "skill_id") }
+            joinColumns = {@JoinColumn(name = "employee_id")},
+            inverseJoinColumns = {@JoinColumn(name = "skill_id")}
     )
     List<Skill> skills;
 
+    @Builder
+    public Employee(String firstName, String middleName, String lastName,
+                    String gender, String address,
+                    String email, String startDate, Integer vacationDays,
+                    Integer workingHours, Integer workingDays){
+        super( firstName, middleName, lastName, gender, address);
+        this.email = email;
+        this.startDate = LocalDate.parse(startDate);
+        this.vacationDays = vacationDays;
+        this.workingDays = workingDays;
+        this.workingHours = workingHours;
+    }
 }
