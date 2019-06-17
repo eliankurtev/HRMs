@@ -9,9 +9,9 @@
             <column name="id" type="bigint" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="firstName" type="varchar"/>
-            <column name="middleName" type="varchar"/>
-            <column name="lastName" type="varchar"/>
+            <column name="first_name" type="varchar"/>
+            <column name="middle_name" type="varchar"/>
+            <column name="last_name" type="varchar"/>
             <column name="gender" type="varchar"/>
             <column name="area" type="varchar"/>
             <column name="city" type="varchar"/>
@@ -24,15 +24,16 @@
                 <constraints primaryKey="true"/>
             </column>
             <column name="email" type="varchar"/>
-            <column name="start_date" type="timestamp"/>
-            <column name="end_date" type="timestamp"/>
+            <column name="start_date" type="DATE"/>
+            <column name="end_date" type="DATE"/>
             <column name="photo" type="varchar"/>
-            <column name="vacationDays" type="int"/>
-            <column name="jobNumber" type="int"/>
-            <column name="workingHours" type="int"/>
-            <column name="workingDays" type="int"/>
+            <column name="vacation_days" type="int"/>
+            <column name="job_number" type="int"/>
+            <column name="working_hours" type="int"/>
+            <column name="working_days" type="int"/>
             <column name="manager" type="bigint"/>
             <column name="security_data_id" type="bigint"/>
+            <column name="grade_id" type="bigint"/>
         </createTable>
         <createTable tableName="company">
             <column name="eik" type="smallint" autoIncrement="true">
@@ -72,6 +73,7 @@
             <column type="bigint" name="id" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
+            <column type="varchar" name="name"/>
             <column type="bigint" name="department"/>
             <column type="bigint" name="employee"/>
             <column type="int" name="jobID"/>
@@ -81,8 +83,8 @@
                 <constraints primaryKey="true"/>
             </column>
             <column type="varchar" name="name"/>
-            <column name="start_date" type="timestamp"/>
-            <column name="end_date" type="timestamp"/>
+            <column name="start_date" type="DATE"/>
+            <column name="end_date" type="DATE"/>
             <column name="department_id" type="bigint"/>
         </createTable>
         <createTable tableName="security_data">
@@ -90,12 +92,12 @@
                 <constraints primaryKey="true"/>
             </column>
             <column type="smallint" name="egn"/>
-            <column name="idNumber" type="smallint"/>
-            <column name="issuedDate" type="timestamp"/>
+            <column name="id_number" type="smallint"/>
+            <column name="issued_date" type="DATE"/>
             <column name="authority" type="varchar"/>
-            <column name="yearsOfLabour" type="int"/>
-            <column name="monthsOfLabour" type="int"/>
-            <column name="daysOfLabour" type="int"/>
+            <column name="years_of_labour" type="int"/>
+            <column name="months_of_labour" type="int"/>
+            <column name="days_of_labour" type="int"/>
             <column name="salary" type="real"/>
             <column name="IBAN" type="varchar"/>
         </createTable>

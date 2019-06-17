@@ -17,19 +17,6 @@
     <changeSet author="Rumyana Krumova" id="20190512-3">
 
     </changeSet>
-    <changeSet author="Rumyana Krumova" id="20190512-4">
-        <createTable tableName="employee_grade">
-            <column type="bigint" name="employee_id" />
-            <column type="bigint" name="grade_id"/>
-        </createTable>
-        <addForeignKeyConstraint baseColumnNames="grade_id"
-                                 baseTableName="employee_grade"
-                                 constraintName="fk_employee_grade_a"
-                                 deferrable="true"
-                                 initiallyDeferred="true"
-                                 referencedColumnNames="id"
-                                 referencedTableName="grade"/>
-    </changeSet>
     <changeSet author="Rumyana Krumova" id="20190512-5">
         <createTable tableName="employee_skill">
             <column type="bigint" name="employee_id" />

@@ -11,6 +11,7 @@ import java.util.List;
 
 @Entity
 @Data
+@Table(name = "employee")
 public class Employee {
     @Id
     private Long id;
@@ -20,8 +21,8 @@ public class Employee {
     @Email
     private String email;
 
-    @Column
-    private LocalDate starDate;
+    @Column(columnDefinition = "DATE")
+    private LocalDate startDate;
 
     @Column
     private LocalDate endDate;
@@ -29,21 +30,21 @@ public class Employee {
     @Column
     private String photo;
 
-    @Column
+    @Column(name = "vacation_days")
     private Integer vacationDays;
 
-    @Column
-//    @NotNull
+    @Column(name = "job_number")
+    @NotNull
     @Length(max = 9)
     private Integer jobNumber;
 
     // 4/6/8
-    @Column
-//    @NotNull
+    @Column(name = "working_hours")
+    @NotNull
     private Integer workingHours;
 
-    @Column
-//    @NotNull
+    @Column(name = "working_days")
+    @NotNull
     private Integer workingDays;
 
     @OneToOne
@@ -65,7 +66,7 @@ public class Employee {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "employee_skills",
+            name = "employee_skill",
             joinColumns = { @JoinColumn(name = "employee_id") },
             inverseJoinColumns = { @JoinColumn(name = "skill_id") }
     )

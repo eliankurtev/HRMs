@@ -9,19 +9,19 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Person {
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-//    @NotNull
+    @Column(name = "first_name")
+    @NotNull
     private String firstName;
 
-    @Column
-//    @NotNull
+    @Column(name = "middle_name")
+    @NotNull
     private String middleName;
 
-    @Column
-//    @NotNull
+    @Column(name = "last_name")
+    @NotNull
     private String lastName;
 
     @Column

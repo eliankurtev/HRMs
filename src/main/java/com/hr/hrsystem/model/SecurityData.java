@@ -11,7 +11,7 @@ import java.time.LocalDate;
 @Entity
 public class SecurityData {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -41,7 +41,7 @@ public class SecurityData {
     private Integer daysOfLabour;
 
     @Column
-    private Double salary;
+    private Float salary;
 
     @Column
     private String IBAN;

@@ -10,7 +10,7 @@ import java.util.List;
 @Data
 public class Project {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column
@@ -24,7 +24,7 @@ public class Project {
 
     @ManyToMany(cascade = { CascadeType.ALL })
     @JoinTable(
-            name = "project_skills",
+            name = "project_skill",
             joinColumns = { @JoinColumn(name = "project_id") },
             inverseJoinColumns = { @JoinColumn(name = "skill_id") }
     )

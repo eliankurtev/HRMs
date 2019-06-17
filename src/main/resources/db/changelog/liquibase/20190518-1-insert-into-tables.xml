@@ -8,36 +8,80 @@
         <insert schemaName="public"
                 tableName="grade">
             <column name="name" value="Intern"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="grade">
             <column name="name" value="Junior"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="grade">
             <column name="name" value="Regular"/>
+        </insert>
+        <insert schemaName="public"
+                tableName="grade">
             <column name="name" value="Expert"/>
         </insert>
+        <rollback/>
+    </changeSet>
+    <changeSet author="Rumyana Krumova" id="20190518-2">
         <insert schemaName="public" tableName="skill">
             <column name="name" value="Java"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="C#"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="English"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="Testing"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="Angular"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="JavaScript"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="Python"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="GO"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="SpringBoot"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="Asp.Net"/>
+        </insert>
+        <insert schemaName="public" tableName="skill">
             <column name="name" value="C++"/>
         </insert>
-        <insert schemaName="public"
-                tableName="department">
+        <rollback/>
+    </changeSet>
+    <changeSet author="Rumyana Krumova" id="20190518-3">
+        <insert schemaName="public" tableName="department">
             <column name="name" value="Quality Assurance"/>
+        </insert>
+        <insert schemaName="public" tableName="department">
             <column name="name" value="Development"/>
+        </insert>
+        <insert schemaName="public" tableName="department">
             <column name="name" value="Application Management"/>
+        </insert>
+        <insert schemaName="public" tableName="department">
             <column name="name" value="Management"/>
+        </insert>
+        <insert schemaName="public" tableName="department">
             <column name="name" value="Human Resources"/>
         </insert>
-        <insert schemaName="public"
-                tableName="person">
-            <column name="firstName" value="Pesho"/>
-            <column name="middleName" value="Peshev"/>
-            <column name="lastName" value="Peshev"/>
+        <rollback/>
+    </changeSet>
+    <changeSet author="Rumyana Krumova" id="20190518-4">
+        <insert schemaName="public" tableName="person">
+            <column name="first_name" value="Pesho"/>
+            <column name="middle_name" value="Peshev"/>
+            <column name="last_name" value="Peshev"/>
             <column name="gender" value="M"/>
             <column name="area" value="Kyustendil"/>
             <column name="city" value="Kyustendil"/>
@@ -45,17 +89,23 @@
             <column name="username" value="hr"/>
             <column name="password" value="hr"/>
         </insert>
+        <rollback/>
     </changeSet>
+
     <changeSet author="Rumyana Krumova" id="20190608-1">
         <insert schemaName="public"
                 tableName="employee">
             <column name="person_id" value="1"/>
             <column name="email" value="peshkata@peshev.com"/>
-            <column name="vacationDays" value="20"/>
-            <column name="jobNumber" value="66666666"/>
-            <column name="workingHours" value="8"/>
-            <column name="workingDays" value="5"/>
+            <column name="vacation_days" value="20"/>
+            <column name="job_number" value="66666666"/>
+            <column name="working_hours" value="8"/>
+            <column name="working_days" value="5"/>
         </insert>
+        <rollback/>
+    </changeSet>
+
+    <changeSet author="Rumyana Krumova" id="20190608-2">
         <insert schemaName="public"
                 tableName="company">
             <column name="eik" value="5555"/>
@@ -64,5 +114,6 @@
             <column name="city" value="Kyustendil"/>
             <column name="address" value="Dupnishko shose №20"/>
         </insert>
+        <rollback/>
     </changeSet>
 </databaseChangeLog>

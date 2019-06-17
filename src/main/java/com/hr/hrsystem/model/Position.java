@@ -10,14 +10,16 @@ import java.util.List;
 @Data
 public class Position {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @Column
     private String name;
+
     @Column
     @Length(max = 8)
     //НКПИД
-    private Short jobID;
+    private Integer jobID;
 
     @ManyToMany(mappedBy = "positions")
     private List<Employee> employees;
@@ -26,7 +28,7 @@ public class Position {
     private List<Project> projects;
 
     @ManyToOne
-    @JoinColumn(name="department_id", nullable=false)
+    @JoinColumn(name="department", nullable=false)
     private Department department;
 
 }
