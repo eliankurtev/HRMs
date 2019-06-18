@@ -5,6 +5,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.time.LocalDate;
 
 @Data
@@ -15,11 +16,11 @@ public class SecurityData {
     private Long id;
 
     @Column
-//    @Length(max = 10)
+    @Max(value = 9)
     private Short egn;
 
     @Column
-//    @Length(max = 9)
+    @Max(value = 9)
     private Short idNumber;
 
     @Column
@@ -29,11 +30,11 @@ public class SecurityData {
     private String authority;
 
     @Column
-//    @Length(max = 2)
+    @Max(value = 2)
     private Integer yearsOfLabour;
 
     @Column
-//    @Length(max = 2)
+    @Max(value = 2)
     private Integer monthsOfLabour;
 
     @Column

@@ -8,4 +8,6 @@ public interface SkillService {
     List<Skill> findAll();
 
     List<String> findAllNames();
+
+    List<Skill> getByName(List<String> name);
 }

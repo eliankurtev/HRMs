@@ -4,6 +4,7 @@ import lombok.Data;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
 import java.util.List;
 
 @Entity
@@ -17,12 +18,12 @@ public class Position {
     private String name;
 
     @Column
-    @Length(max = 8)
+    @Max(value = 8)
     //НКПИД
     private Integer jobid;
 
-//    @ManyToMany(mappedBy = "positions")
-//    private List<Employee> employees;
+    @ManyToMany(mappedBy = "positions")
+    private List<Employee> employees;
 
     @ManyToMany(mappedBy = "positions")
     private List<Project> projects;

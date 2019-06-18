@@ -23,4 +23,9 @@ public class GradeServiceImpl implements GradeService {
     public List<String> findAllNames(){
         return gradeRepository.findAll().stream().map(Grade::getName).collect(Collectors.toList());
     }
+
+    @Override
+    public Grade findByName(String name){
+        return gradeRepository.findByName(name).isPresent() ? gradeRepository.findByName(name).get() : null;
+    }
 }

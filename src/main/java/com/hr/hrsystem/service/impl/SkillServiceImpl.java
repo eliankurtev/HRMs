@@ -23,4 +23,9 @@ public class SkillServiceImpl implements SkillService {
     public List<String> findAllNames(){
         return findAll().stream().map(Skill::getName).collect(Collectors.toList());
     }
+
+    @Override
+    public List<Skill> getByName(List<String> name){
+        return skillRepository.findAllByNameIn(name);
+    }
 }

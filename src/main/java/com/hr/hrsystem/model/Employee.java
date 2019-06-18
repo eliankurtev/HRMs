@@ -66,13 +66,13 @@ public class Employee  {
     @JoinColumn(name = "security_data_id")
     private SecurityData securityData;
 
-//    @ManyToMany(cascade = {CascadeType.ALL})
-//    @JoinTable(
-//            name = "employee_position",
-//            joinColumns = {@JoinColumn(name = "employee_id")},
-//            inverseJoinColumns = {@JoinColumn(name = "position_id")}
-//    )
-//    List<Position> positions;
+    @ManyToMany(cascade = {CascadeType.ALL})
+    @JoinTable(
+            name = "employee_position",
+            joinColumns = {@JoinColumn(name = "employee_id")},
+            inverseJoinColumns = {@JoinColumn(name = "position_id")}
+    )
+    List<Position> positions;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
