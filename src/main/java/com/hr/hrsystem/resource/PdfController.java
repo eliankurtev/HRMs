@@ -1,6 +1,7 @@
 package com.hr.hrsystem.resource;
 
 
+import com.hr.hrsystem.service.impl.PdfCreatorServiceImpl;
 import com.itextpdf.text.DocumentException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +27,7 @@ public class PdfController {
     @ResponseBody
     String homeApplication() {
         try {
-            createApplication();
+            createApplication(1L);
             return "PDF Created!";
         } catch (Exception ex) {
             return "Error in creating pdf: " + ex;
@@ -34,7 +35,7 @@ public class PdfController {
     }
 
     private void createContract() {
-        PdfCreator pdf = new PdfCreator();
+        PdfCreatorServiceImpl pdf = new PdfCreatorServiceImpl();
         try {
             pdf.createContract();
         } catch (DocumentException e) {
@@ -44,10 +45,10 @@ public class PdfController {
         }
     }
 
-    private void createApplication() {
-        PdfCreator pdf = new PdfCreator();
+    private void createApplication(Long id) {
+        PdfCreatorServiceImpl pdf = new PdfCreatorServiceImpl();
         try {
-            pdf.createApplication();
+            pdf.createApplication(id);
         } catch (DocumentException e) {
             e.printStackTrace();
         } catch (FileNotFoundException e) {

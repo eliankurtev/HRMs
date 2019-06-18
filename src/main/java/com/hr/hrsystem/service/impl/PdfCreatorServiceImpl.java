@@ -1,14 +1,25 @@
-package com.hr.hrsystem.resource;
+package com.hr.hrsystem.service.impl;
 
+import com.hr.hrsystem.dto.ApplicationForVacationDto;
+import com.hr.hrsystem.service.HireEmployeeService;
+import com.hr.hrsystem.service.PdfCreatorService;
 import com.itextpdf.text.*;
 import com.itextpdf.text.pdf.BaseFont;
 import com.itextpdf.text.pdf.PdfWriter;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
 
-public class PdfCreator {
+@Service
+public class PdfCreatorServiceImpl implements PdfCreatorService {
+
+    @Autowired
+    HireEmployeeService hireEmployeeService;
+
+
     private static final String FONT_PATH = "fonts/Montserrat-Regular.ttf";
 
     private static final String FIRM_NAME = "ФИРМА ООД, ЕИК 202857047";
@@ -45,7 +56,11 @@ public class PdfCreator {
     }
 
 
-    public void createApplication() throws FileNotFoundException, DocumentException {
+    public void createApplication(Long id) throws FileNotFoundException, DocumentException {
+        ApplicationForVacationDto app = hireEmployeeService.createApplicationForVacation(id);
+
+
+
         Document document = new Document();
 
         Paragraph forWhom = new Paragraph("До Директора/Управителя\n", fontSmallBold);
@@ -60,7 +75,7 @@ public class PdfCreator {
         from.setAlignment(Element.ALIGN_CENTER);
 
         Paragraph fromWhom = new Paragraph(EMPTY_STRING, fontSmallNormal);
-        Chunk employeeName = new Chunk(EMPLOYEE_NAME, fontSmallBold);
+        Chunk employeeName = new Chunk(app.getFirstNameEmployee(), fontSmallBold);
         Chunk position = new Chunk(", на длъжност ", fontSmallNormal);
         Chunk employeePosition = new Chunk("СПЕЦИАЛИСТ СОФТУЕРНО ТЕСТВАНЕ", fontSmallBold);
         fromWhom.add(employeeName);

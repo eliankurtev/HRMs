@@ -8,4 +8,6 @@
     <include file="db/changelog/liquibase/20190408-1-create-tables.xml"/>
     <include file="db/changelog/liquibase/20190512-1-create-constraints.xml"/>
     <include file="db/changelog/liquibase/20190518-1-insert-into-tables.xml"/>
+    <include file="db/changelog/liquibase/20190618-1-add-company-in-employee.xml"/>
+
 </databaseChangeLog>

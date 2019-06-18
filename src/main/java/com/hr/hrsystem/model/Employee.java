@@ -91,4 +91,8 @@ public class Employee  {
         this.workingDays = workingDays;
         this.workingHours = workingHours;
     }
+
+    @OneToOne
+    @JoinColumn(name = "company_id")
+    private Company company;
 }

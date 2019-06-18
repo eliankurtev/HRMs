@@ -1,5 +1,6 @@
 package com.hr.hrsystem.service.impl;
 
+import com.hr.hrsystem.dto.ApplicationForVacationDto;
 import com.hr.hrsystem.dto.EmployeeDto;
 import com.hr.hrsystem.model.*;
 import com.hr.hrsystem.service.*;
@@ -67,5 +68,18 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
         boolean isSavedEmployee = Objects.nonNull(saveEmployee);
 
         return isSavedEmployee && isSavedPerson && isSavedSecurity;
+    }
+
+    @Override
+    public ApplicationForVacationDto createApplicationForVacation(Long employeeId) {
+        Employee employee = employeeService.findById(employeeId);
+
+        return ApplicationForVacationDto.builder()
+                .firstNameEmployee(employee.getPerson().getFirstName())
+                .secondNameEmployee(employee.getPerson().getMiddleName())
+                .lastNameEmployee(employee.getPerson().getLastName())
+                .jobNameEmployee(employee.getJobNumber().toString())
+                .firmName(employee.getCompany().getName())
+                .build();
     }
 }

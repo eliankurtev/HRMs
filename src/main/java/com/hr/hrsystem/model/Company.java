@@ -27,5 +27,7 @@ public class Company {
     @Column
     private String address;
 
+
+
     //TODO: Manager
 }

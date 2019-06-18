@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+
+    <changeSet author="Kiril Nikolov" id="20190618-2">
+        <addColumn tableName="employee">
+            <column name="company_id" type="smallint"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="Kiril Nikolov" id="20190618-1">
+        <addForeignKeyConstraint baseColumnNames="company_id"
+                                 baseTableName="employee"
+                                 constraintName="fk_employee_company"
+                                 deferrable="true"
+                                 initiallyDeferred="true"
+                                 referencedColumnNames="eik"
+                                 referencedTableName="company"/>
+    </changeSet>
+</databaseChangeLog>
