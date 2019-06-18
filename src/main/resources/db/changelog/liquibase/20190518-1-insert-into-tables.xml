@@ -95,7 +95,7 @@
     <changeSet author="Rumyana Krumova" id="20190608-1">
         <insert schemaName="public"
                 tableName="employee">
-            <column name="person_id" value="1"/>
+            <column name="id" value="1"/>
             <column name="email" value="peshkata@peshev.com"/>
             <column name="vacation_days" value="20"/>
             <column name="job_number" value="66666666"/>

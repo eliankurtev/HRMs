@@ -15,11 +15,11 @@ public class SecurityData {
     private Long id;
 
     @Column
-    @Length(max = 10)
+//    @Length(max = 10)
     private Short egn;
 
     @Column
-    @Length(max = 9)
+//    @Length(max = 9)
     private Short idNumber;
 
     @Column
@@ -29,15 +29,14 @@ public class SecurityData {
     private String authority;
 
     @Column
-    @Length(max = 2)
+//    @Length(max = 2)
     private Integer yearsOfLabour;
 
     @Column
-    @Length(max = 2)
+//    @Length(max = 2)
     private Integer monthsOfLabour;
 
     @Column
-    @Length(max = 2)
     private Integer daysOfLabour;
 
     @Column

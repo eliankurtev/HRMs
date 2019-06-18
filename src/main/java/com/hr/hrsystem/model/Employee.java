@@ -3,10 +3,13 @@ package com.hr.hrsystem.model;
 import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -14,8 +17,9 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "employee")
-@EqualsAndHashCode(callSuper = true)
-public class Employee extends Person {
+@EqualsAndHashCode
+@NoArgsConstructor
+public class Employee  {
     @Id
     private Long id;
 
@@ -37,8 +41,8 @@ public class Employee extends Person {
     private Integer vacationDays;
 
     @Column(name = "job_number")
-    @NotNull
-    @Length(max = 9)
+//    @NotNull
+    @Max(value = 9)
     private Integer jobNumber;
 
     @Column(name = "working_hours")
@@ -50,7 +54,7 @@ public class Employee extends Person {
     private Integer workingDays;
 
     @OneToOne
-    @JoinColumn(name = "person_id")
+    @JoinColumn(name = "id")
     @MapsId
     private Person person;
 
@@ -62,13 +66,13 @@ public class Employee extends Person {
     @JoinColumn(name = "security_data_id")
     private SecurityData securityData;
 
-    @ManyToMany(cascade = {CascadeType.ALL})
-    @JoinTable(
-            name = "employee_position",
-            joinColumns = {@JoinColumn(name = "employee_id")},
-            inverseJoinColumns = {@JoinColumn(name = "position_id")}
-    )
-    List<Position> positions;
+//    @ManyToMany(cascade = {CascadeType.ALL})
+//    @JoinTable(
+//            name = "employee_position",
+//            joinColumns = {@JoinColumn(name = "employee_id")},
+//            inverseJoinColumns = {@JoinColumn(name = "position_id")}
+//    )
+//    List<Position> positions;
 
     @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
@@ -78,12 +82,9 @@ public class Employee extends Person {
     )
     List<Skill> skills;
 
-    @Builder
-    public Employee(String firstName, String middleName, String lastName,
-                    String gender, String address,
-                    String email, String startDate, Integer vacationDays,
+    @Builder(builderMethodName = "employeeBuilder")
+    public Employee( String email, String startDate, Integer vacationDays,
                     Integer workingHours, Integer workingDays){
-        super( firstName, middleName, lastName, gender, address);
         this.email = email;
         this.startDate = LocalDate.parse(startDate);
         this.vacationDays = vacationDays;

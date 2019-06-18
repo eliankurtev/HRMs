@@ -7,9 +7,8 @@ import lombok.ToString;
 
 @Data
 @ToString
-@Builder
 @NoArgsConstructor
-public abstract class PersonDto {
+public class PersonDto {
 
     private Long id;
 
@@ -26,4 +25,14 @@ public abstract class PersonDto {
     private String city;
 
     private String address;
+
+    @Builder
+    public PersonDto(String firstName, String middleName, String lastName,
+                     String gender, String address){
+        this.address = address;
+        this.firstName = firstName;
+        this.middleName = middleName;
+        this.lastName = lastName;
+        this.gender = gender;
+    }
 }

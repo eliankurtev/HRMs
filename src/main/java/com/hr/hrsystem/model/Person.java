@@ -8,8 +8,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Data
-@Entity
-@MappedSuperclass
+@Entity(name = "person")
 @NoArgsConstructor
 public class Person {
     @Id
@@ -29,7 +28,7 @@ public class Person {
     private String lastName;
 
     @Column
-    @NotNull
+//    @NotNull
     private String gender;
 
     @Column

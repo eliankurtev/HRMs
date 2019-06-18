@@ -19,10 +19,10 @@ public class Position {
     @Column
     @Length(max = 8)
     //НКПИД
-    private Integer jobID;
+    private Integer jobid;
 
-    @ManyToMany(mappedBy = "positions")
-    private List<Employee> employees;
+//    @ManyToMany(mappedBy = "positions")
+//    private List<Employee> employees;
 
     @ManyToMany(mappedBy = "positions")
     private List<Project> projects;

@@ -5,7 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
     <changeSet author="Rumyana Krumova" id="20190512-1">
-        <addForeignKeyConstraint baseColumnNames="person_id"
+        <addForeignKeyConstraint baseColumnNames="id"
                                  baseTableName="employee"
                                  constraintName="fk_employee_person"
                                  deferrable="true"
@@ -27,7 +27,7 @@
     <changeSet author="Rumyana Krumova" id="20190512-4">
         <addForeignKeyConstraint baseColumnNames="security_data_id"
                                  baseTableName="employee"
-                                 constraintName="fk_employee_grade"
+                                 constraintName="fk_employee_security_data"
                                  deferrable="true"
                                  initiallyDeferred="true"
                                  referencedColumnNames="id"
@@ -44,7 +44,7 @@
                                  constraintName="fk_employee_skill_e"
                                  deferrable="true"
                                  initiallyDeferred="true"
-                                 referencedColumnNames="person_id"
+                                 referencedColumnNames="id"
                                  referencedTableName="employee"/>
         <addForeignKeyConstraint baseColumnNames="skill_id"
                                  baseTableName="employee_skill"
@@ -64,7 +64,7 @@
                                  constraintName="fk_employee_position_e"
                                  deferrable="true"
                                  initiallyDeferred="true"
-                                 referencedColumnNames="person_id"
+                                 referencedColumnNames="id"
                                  referencedTableName="employee"/>
         <addForeignKeyConstraint baseColumnNames="position_id"
                                  baseTableName="employee_position"
@@ -84,7 +84,7 @@
                                  constraintName="fk_employee_project_e"
                                  deferrable="true"
                                  initiallyDeferred="true"
-                                 referencedColumnNames="person_id"
+                                 referencedColumnNames="id"
                                  referencedTableName="employee"/>
         <addForeignKeyConstraint baseColumnNames="project_id"
                                  baseTableName="employee_project"

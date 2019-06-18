@@ -26,19 +26,25 @@ public class EmployeeDto extends PersonDto {
 
     private Integer workingDays;
 
-    private Integer salary;
+    private Float salary;
 
     private String grade;
 
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
     private String[] skill;
 
-    @Builder
-    private EmployeeDto(Long id, String firstName, String middleName, String lastName,
-                        String gender, String area, String city, String address,
+    @Builder(builderMethodName = "employeeDtoBuilder")
+    private EmployeeDto(String firstName, String middleName, String lastName,
+                        String gender, String address,
                         String email, String startDate, Integer vacationDays,
-                        Integer workingHours, Integer workingDays, Integer salary, String grade, String[] skill) {
-        super(id, firstName, middleName, lastName, gender, area, city, address);
+                        Integer workingHours, Integer workingDays, Float salary, String grade, String[] skill) {
+        PersonDto.builder()
+                .address(address)
+                .firstName(firstName)
+                .gender(gender)
+                .lastName(lastName)
+                .middleName(middleName)
+                .build();
         this.email = email;
         this.startDate = startDate;
         this.vacationDays = vacationDays;
