@@ -3,6 +3,7 @@ package com.hr.hrsystem.model;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 @Data
 @Entity(name = "person")
 @NoArgsConstructor
+@ToString
 public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,8 +48,6 @@ public class Person {
     @Column
     private String password;
 
-    @OneToOne(mappedBy = "person")
-    private Employee employee;
 
     @Builder
     public Person(String firstName, String middleName, String lastName, String gender, String address) {

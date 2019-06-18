@@ -40,13 +40,7 @@ public class EmployeeDto extends PersonDto {
                         String gender, String address,
                         String email, String startDate, Integer vacationDays,
                         Integer workingHours, Integer workingDays, Float salary, String grade, List<String> skill) {
-        PersonDto.builder()
-                .address(address)
-                .firstName(firstName)
-                .gender(gender)
-                .lastName(lastName)
-                .middleName(middleName)
-                .build();
+        super( firstName, middleName, lastName, gender, address);
         this.email = email;
         this.startDate = startDate;
         this.vacationDays = vacationDays;

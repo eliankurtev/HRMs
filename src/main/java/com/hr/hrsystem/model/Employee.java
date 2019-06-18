@@ -1,9 +1,6 @@
 package com.hr.hrsystem.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -19,7 +16,7 @@ import java.util.List;
 @Table(name = "employee")
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Employee  {
+public class Employee {
     @Id
     private Long id;
 
@@ -83,12 +80,19 @@ public class Employee  {
     List<Skill> skills;
 
     @Builder(builderMethodName = "employeeBuilder")
-    public Employee( String email, String startDate, Integer vacationDays,
-                    Integer workingHours, Integer workingDays){
+    public Employee(String email, String startDate, Integer vacationDays,
+                    Integer workingHours, Integer workingDays) {
         this.email = email;
         this.startDate = LocalDate.parse(startDate);
         this.vacationDays = vacationDays;
         this.workingDays = workingDays;
         this.workingHours = workingHours;
+    }
+
+    @Override
+    public String toString() {
+        return this.person.toString() + this.email +
+                this.startDate + this.vacationDays
+                + this.workingDays + this.workingHours;
     }
 }

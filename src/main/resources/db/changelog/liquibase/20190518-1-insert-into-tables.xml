@@ -77,33 +77,33 @@
         </insert>
         <rollback/>
     </changeSet>
-    <changeSet author="Rumyana Krumova" id="20190518-4">
-        <insert schemaName="public" tableName="person">
-            <column name="first_name" value="Pesho"/>
-            <column name="middle_name" value="Peshev"/>
-            <column name="last_name" value="Peshev"/>
-            <column name="gender" value="M"/>
-            <column name="area" value="Kyustendil"/>
-            <column name="city" value="Kyustendil"/>
-            <column name="address" value="Dupnishko shose №18"/>
-            <column name="username" value="hr"/>
-            <column name="password" value="hr"/>
-        </insert>
-        <rollback/>
-    </changeSet>
+<!--    <changeSet author="Rumyana Krumova" id="20190518-4">-->
+<!--        <insert schemaName="public" tableName="person">-->
+<!--            <column name="first_name" value="Pesho"/>-->
+<!--            <column name="middle_name" value="Peshev"/>-->
+<!--            <column name="last_name" value="Peshev"/>-->
+<!--            <column name="gender" value="M"/>-->
+<!--            <column name="area" value="Kyustendil"/>-->
+<!--            <column name="city" value="Kyustendil"/>-->
+<!--            <column name="address" value="Dupnishko shose №18"/>-->
+<!--            <column name="username" value="hr"/>-->
+<!--            <column name="password" value="hr"/>-->
+<!--        </insert>-->
+<!--        <rollback/>-->
+<!--    </changeSet>-->
 
-    <changeSet author="Rumyana Krumova" id="20190608-1">
-        <insert schemaName="public"
-                tableName="employee">
-            <column name="id" value="1"/>
-            <column name="email" value="peshkata@peshev.com"/>
-            <column name="vacation_days" value="20"/>
-            <column name="job_number" value="66666666"/>
-            <column name="working_hours" value="8"/>
-            <column name="working_days" value="5"/>
-        </insert>
-        <rollback/>
-    </changeSet>
+<!--    <changeSet author="Rumyana Krumova" id="20190608-1">-->
+<!--        <insert schemaName="public"-->
+<!--                tableName="employee">-->
+<!--            <column name="id" value="1"/>-->
+<!--            <column name="email" value="peshkata@peshev.com"/>-->
+<!--            <column name="vacation_days" value="20"/>-->
+<!--            <column name="job_number" value="66666666"/>-->
+<!--            <column name="working_hours" value="8"/>-->
+<!--            <column name="working_days" value="5"/>-->
+<!--        </insert>-->
+<!--        <rollback/>-->
+<!--    </changeSet>-->
 
     <changeSet author="Rumyana Krumova" id="20190608-2">
         <insert schemaName="public"
