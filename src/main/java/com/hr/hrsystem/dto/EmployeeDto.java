@@ -36,11 +36,11 @@ public class EmployeeDto extends PersonDto {
     private List<String> skill;
 
     @Builder(builderMethodName = "employeeDtoBuilder")
-    private EmployeeDto(String firstName, String middleName, String lastName,
+    private EmployeeDto(String id, String firstName, String middleName, String lastName,
                         String gender, String address,
                         String email, String startDate, Integer vacationDays,
                         Integer workingHours, Integer workingDays, Float salary, String grade, List<String> skill) {
-        super( firstName, middleName, lastName, gender, address);
+        super(id, firstName, middleName, lastName, gender, address);
         this.email = email;
         this.startDate = startDate;
         this.vacationDays = vacationDays;

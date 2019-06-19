@@ -8,4 +8,6 @@ public interface EmployeeService {
     Employee saveEmployee(Employee employee);
 
     List<Employee> findAll();
+
+    Employee findOneById(String id);
 }

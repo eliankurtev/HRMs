@@ -10,7 +10,7 @@ import lombok.ToString;
 @NoArgsConstructor
 public class PersonDto {
 
-    private Long id;
+    private String id;
 
     private String firstName;
 
@@ -27,8 +27,9 @@ public class PersonDto {
     private String address;
 
     @Builder
-    public PersonDto(String firstName, String middleName, String lastName,
+    public PersonDto(String id, String firstName, String middleName, String lastName,
                      String gender, String address){
+        this.id = id;
         this.address = address;
         this.firstName = firstName;
         this.middleName = middleName;

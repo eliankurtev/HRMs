@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
@@ -20,9 +21,20 @@ public class TransformationServiceImpl implements TransformationService {
     private EmployeeService employeeService;
 
     @Override
-    public EmployeeDto employeeToDto(Employee employee){
+    public EmployeeDto getById(String id) {
+        Employee employee = employeeService.findOneById(id);
+        return employeeToDto(employee);
+    }
+
+    @Override
+    public EmployeeDto employeeToDto(Employee employee) {
+        if (Objects.isNull(employee)) {
+            return null;
+        }
+
         Person person = employee.getPerson();
         return EmployeeDto.employeeDtoBuilder()
+                .id(employee.getId().toString())
                 .middleName(person.getMiddleName())
                 .lastName(person.getLastName())
                 .gender(person.getGender())
@@ -40,7 +52,7 @@ public class TransformationServiceImpl implements TransformationService {
     }
 
     @Override
-    public List<EmployeeDto> getEmployeeDtos(List<Employee> employees){
+    public List<EmployeeDto> getEmployeeDtos(List<Employee> employees) {
         List<EmployeeDto> employeeDtos = new ArrayList<>();
 
         employees.forEach(e -> employeeDtos.add(employeeToDto(e)));
@@ -49,7 +61,7 @@ public class TransformationServiceImpl implements TransformationService {
     }
 
     @Override
-    public List<EmployeeDto> getEmployeeDtos(){
+    public List<EmployeeDto> getEmployeeDtos() {
         List<Employee> employees = employeeService.findAll();
         List<EmployeeDto> employeeDtos = new ArrayList<>();
 
