@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 
 @Data
@@ -30,7 +31,7 @@ public class Person {
     private String lastName;
 
     @Column
-//    @NotNull
+    @NotNull
     private String gender;
 
     @Column
@@ -43,14 +44,17 @@ public class Person {
     private String address;
 
     @Column
-    private String username;
+    @Enumerated(EnumType.STRING)
+    private Status status;
 
     @Column
-    private String password;
-
+    @NotNull
+    @Email
+    private String email;
 
     @Builder
-    public Person(String firstName, String middleName, String lastName, String gender, String address) {
+    public Person(String firstName, String middleName, String lastName, String gender, String address, String email) {
+        this.email = email;
         this.firstName = firstName;
         this.middleName = middleName;
         this.lastName = lastName;

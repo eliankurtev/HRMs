@@ -40,7 +40,7 @@ public class TransformationServiceImpl implements TransformationService {
                 .gender(person.getGender())
                 .firstName(person.getFirstName())
                 .address(person.getAddress())
-                .email(employee.getEmail())
+                .email(employee.getPerson().getEmail())
                 .grade(employee.getGrade().getName())
                 .salary(employee.getSecurityData().getSalary())
                 .workingHours(employee.getWorkingHours())
