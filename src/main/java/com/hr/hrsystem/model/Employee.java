@@ -20,11 +20,6 @@ public class Employee {
     @Id
     private Long id;
 
-    @Column
-    @NotNull
-    @Email
-    private String email;
-
     @Column(columnDefinition = "DATE")
     private LocalDate startDate;
 
@@ -38,7 +33,7 @@ public class Employee {
     private Integer vacationDays;
 
     @Column(name = "job_number")
-//    @NotNull
+    @NotNull
     @Max(value = 9)
     private Integer jobNumber;
 
@@ -49,6 +44,12 @@ public class Employee {
     @Column(name = "working_days")
     @NotNull
     private Integer workingDays;
+
+    @Column
+    private String username;
+
+    @Column
+    private String password;
 
     @OneToOne
     @JoinColumn(name = "id")
@@ -82,7 +83,6 @@ public class Employee {
     @Builder(builderMethodName = "employeeBuilder")
     public Employee(String email, String startDate, Integer vacationDays,
                     Integer workingHours, Integer workingDays) {
-        this.email = email;
         this.startDate = LocalDate.parse(startDate);
         this.vacationDays = vacationDays;
         this.workingDays = workingDays;
@@ -91,7 +91,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return this.person.toString() + this.email +
+        return this.person.toString() +
                 this.startDate + this.vacationDays
                 + this.workingDays + this.workingHours;
     }

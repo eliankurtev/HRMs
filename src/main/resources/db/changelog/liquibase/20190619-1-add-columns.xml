@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog/1.7"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog/1.7
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
+    <changeSet author="Rumyana Krumova" id="20190619-1">
+        <addColumn tableName="employee">
+            <column name="is_fired" type="boolean"/>
+        </addColumn>
+        <addColumn tableName="employee">
+            <column name="username" type="varchar"/>
+        </addColumn>
+        <addColumn tableName="employee">
+            <column name="password" type="varchar"/>
+        </addColumn>
+        <dropColumn tableName="employee" columnName="email"/>
+        <rollback/>
+    </changeSet>
+    <changeSet author="Rumyana Krumova" id="20190619-2">
+        <addColumn tableName="person">
+            <column name="email" type="varchar"/>
+        </addColumn>
+        <addColumn tableName="person">
+            <column name="status" type="varchar"/>
+        </addColumn>
+        <dropColumn tableName="person" columnName="username"/>
+        <dropColumn tableName="person" columnName="password"/>
+        <rollback/>
+    </changeSet>
+</databaseChangeLog>
