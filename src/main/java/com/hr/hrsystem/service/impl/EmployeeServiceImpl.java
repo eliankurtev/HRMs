@@ -18,6 +18,11 @@ public class EmployeeServiceImpl implements EmployeeService {
         return employeeRepository.save(employee);
     }
 
+   @Override
+    public void deleteEmployee(Employee employee) {
+        employeeRepository.delete(employee);
+    }
+
     @Override
     public List<Employee> findAll() {
         return employeeRepository.findAll();
