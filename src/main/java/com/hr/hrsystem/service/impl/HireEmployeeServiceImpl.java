@@ -35,7 +35,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
                 .lastName(employeeDto.getLastName())
                 .gender(employeeDto.getGender())
                 .build();
-        Person savePerson = personService.savePerson(person);
+        boolean savePerson = personService.savePerson(person);
         boolean isSavedPerson = Objects.nonNull(savePerson);
 
         Employee employee = Employee.employeeBuilder()
