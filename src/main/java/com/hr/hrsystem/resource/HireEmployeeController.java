@@ -1,9 +1,11 @@
 package com.hr.hrsystem.resource;
 
 import com.hr.hrsystem.dto.EmployeeDto;
+import com.hr.hrsystem.model.Person;
 import com.hr.hrsystem.service.GradeService;
 import com.hr.hrsystem.service.HireEmployeeService;
 import com.hr.hrsystem.service.SkillService;
+import com.hr.hrsystem.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -28,6 +30,9 @@ public class HireEmployeeController {
     @Autowired
     private HireEmployeeService hireEmployeeService;
 
+    @Autowired
+    private PersonService personService;
+
     @RequestMapping(value = "/grades", method = RequestMethod.GET)
     public ResponseEntity<List<String>> findGrades() {
         return new ResponseEntity<>(gradeService.findAllNames(), HttpStatus.OK);
@@ -45,6 +50,15 @@ public class HireEmployeeController {
         log.info(testDTO.toString());
         boolean hireEmployee = hireEmployeeService.hireEmployee(testDTO);
         return new ResponseEntity<>(hireEmployee, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/addPerson", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Boolean> addPerson(@RequestBody Person testDTO) {
+        log.info(testDTO.toString());
+        boolean addPerson = personService.savePerson(testDTO);
+        return new ResponseEntity<>(addPerson, HttpStatus.OK);
     }
 
 }

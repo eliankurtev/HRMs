@@ -6,13 +6,15 @@ import com.hr.hrsystem.service.PersonService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
 
     @Override
-    public Person savePerson(Person person){
-        return personRepository.save(person);
+    public boolean savePerson(Person person){
+        return Objects.nonNull(personRepository.save(person));
     }
 }

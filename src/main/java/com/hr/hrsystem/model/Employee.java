@@ -1,9 +1,6 @@
 package com.hr.hrsystem.model;
 
-import lombok.Builder;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -19,14 +16,9 @@ import java.util.List;
 @Table(name = "employee")
 @EqualsAndHashCode
 @NoArgsConstructor
-public class Employee  {
+public class Employee {
     @Id
     private Long id;
-
-    @Column
-    @NotNull
-    @Email
-    private String email;
 
     @Column(columnDefinition = "DATE")
     private LocalDate startDate;
@@ -41,9 +33,8 @@ public class Employee  {
     private Integer vacationDays;
 
     @Column(name = "job_number")
-//    @NotNull
-    @Max(value = 9)
-    private Integer jobNumber;
+    @NotNull
+    private JobType jobNumber;
 
     @Column(name = "working_hours")
     @NotNull
@@ -52,6 +43,12 @@ public class Employee  {
     @Column(name = "working_days")
     @NotNull
     private Integer workingDays;
+
+    @Column
+    private String username;
+
+    @Column
+    private String password;
 
     @OneToOne
     @JoinColumn(name = "id")
@@ -83,13 +80,20 @@ public class Employee  {
     List<Skill> skills;
 
     @Builder(builderMethodName = "employeeBuilder")
-    public Employee( String email, String startDate, Integer vacationDays,
-                    Integer workingHours, Integer workingDays){
-        this.email = email;
+    public Employee(String email, String startDate, Integer vacationDays,
+                    Integer workingHours, Integer workingDays, JobType jobNumber) {
         this.startDate = LocalDate.parse(startDate);
         this.vacationDays = vacationDays;
         this.workingDays = workingDays;
         this.workingHours = workingHours;
+        this.jobNumber = jobNumber;
+    }
+
+    @Override
+    public String toString() {
+        return this.person.toString() +
+                this.startDate + this.vacationDays
+                + this.workingDays + this.workingHours;
     }
 
     @OneToOne

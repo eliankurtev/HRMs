@@ -36,15 +36,14 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
                 .lastName(employeeDto.getLastName())
                 .gender(employeeDto.getGender())
                 .build();
-        Person savePerson = personService.savePerson(person);
-        boolean isSavedPerson = Objects.nonNull(savePerson);
-
+        boolean isSavedPerson = personService.savePerson(person);
         Employee employee = Employee.employeeBuilder()
                 .email(employeeDto.getEmail())
                 .startDate(employeeDto.getStartDate())
                 .vacationDays(employeeDto.getVacationDays())
                 .workingDays(employeeDto.getWorkingDays())
                 .workingHours(employeeDto.getWorkingHours())
+                .jobNumber(JobType.findByJobId(employeeDto.getJobId()))
                 .build();
 
         employee.setPerson(person);

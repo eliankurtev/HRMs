@@ -14,18 +14,18 @@ import java.util.*;
 
 
 @Service(value = "userService")
-public class UserServiceImpl implements UserDetailsService, UserService {
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private PersonRepository personRepository;
 
-    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
-        Optional<Person> userOpt = personRepository.findByUsername(userId);
-        if(!userOpt.isPresent()){
-            throw new UsernameNotFoundException("Invalid username or password.");
-        }
-        return new org.springframework.security.core.userdetails.User(userOpt.get().getUsername(), userOpt.get().getPassword(), getAuthority());
-    }
+//    public UserDetails loadUserByUsername(String userId) throws UsernameNotFoundException {
+//        Optional<Person> userOpt = personRepository.findByUsername(userId);
+//        if(!userOpt.isPresent()){
+//            throw new UsernameNotFoundException("Invalid username or password.");
+//        }
+//        return new org.springframework.security.core.userdetails.User(userOpt.get(), userOpt.get(), getAuthority());
+//    }
 
     private List<SimpleGrantedAuthority> getAuthority() {
         return Collections.singletonList(new SimpleGrantedAuthority("ROLE_ADMIN"));
