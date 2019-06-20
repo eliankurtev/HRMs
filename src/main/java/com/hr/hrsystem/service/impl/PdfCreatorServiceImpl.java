@@ -1,6 +1,7 @@
 package com.hr.hrsystem.service.impl;
 
 import com.hr.hrsystem.dto.ApplicationForVacationDto;
+import com.hr.hrsystem.dto.ContractDto;
 import com.hr.hrsystem.service.HireEmployeeService;
 import com.hr.hrsystem.service.PdfCreatorService;
 import com.itextpdf.text.*;
@@ -9,6 +10,7 @@ import com.itextpdf.text.pdf.PdfWriter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.time.LocalDate;
@@ -16,24 +18,7 @@ import java.time.LocalDate;
 @Service
 public class PdfCreatorServiceImpl implements PdfCreatorService {
 
-    @Autowired
-    HireEmployeeService hireEmployeeService;
-
-
     private static final String FONT_PATH = "fonts/Montserrat-Regular.ttf";
-
-    private static final String FIRM_NAME = "ФИРМА ООД, ЕИК 202857047";
-    private static final String FIRM_ADDRESS = "гр. ПЕТРИЧ, УЛ. ХРИСТО БОТЕВ No35 ЕТ. 5 АП.12";
-    private static final String FIRM_HR_NAME = "ПЕТЪР ПЕТРОВ ПЕТРОВ";
-    private static final String FIRM_HR_EGN = "1111111111";
-
-    private static final String EMPLOYEE_NAME = "ГЕОРГИ ГЕОРГИЕВ ГЕОРГИЕВ";
-    private static final String EMPLOYEE_EGN = "2222222222";
-    private static final String EMPLOYEE_NUMBER_LK = "No 666666666";
-    private static final String EMPLOYEE_LK_DATE = "17.05.2005";
-    private static final String EMPLOYEE_LK_MVR = "МВР - Ловеч";
-    private static final String EMPLOYEE_ADDRESS = "гр. Бургас";
-    private static final double EMPLOYEE_SALARY = 10000;
 
     private static final int BIG_SIZE = 15;
     private static final int SMALL_SIZE = 12;
@@ -56,16 +41,17 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
     }
 
 
-    public void createApplication(Long id) throws FileNotFoundException, DocumentException {
+    public void createApplication(Long id, HireEmployeeService hireEmployeeService) throws FileNotFoundException, DocumentException {
         ApplicationForVacationDto app = hireEmployeeService.createApplicationForVacation(id);
-
-
+//        ApplicationForVacationDto app = ApplicationForVacationDto.builder()
+//                .firstNameEmployee("Пешката").secondNameEmployee("Пешков").lastNameEmployee("Пешков").firmName("Най-добрата фирма!")
+//                .jobNameEmployee("Джавар").build();
 
         Document document = new Document();
 
         Paragraph forWhom = new Paragraph("До Директора/Управителя\n", fontSmallBold);
         forWhom.add(new Chunk(" на ", fontSmallNormal));
-        forWhom.add(FIRM_NAME);
+        forWhom.add(app.getFirmName());
         forWhom.setAlignment(Element.ALIGN_RIGHT);
 
         Paragraph title = new Paragraph("МОЛБА ЗА ОТПУСК", fontBigBold);
@@ -75,9 +61,9 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         from.setAlignment(Element.ALIGN_CENTER);
 
         Paragraph fromWhom = new Paragraph(EMPTY_STRING, fontSmallNormal);
-        Chunk employeeName = new Chunk(app.getFirstNameEmployee(), fontSmallBold);
+        Chunk employeeName = new Chunk(app.getFirstNameEmployee() + " " + app.getSecondNameEmployee() + " " + app.getLastNameEmployee(), fontSmallBold);
         Chunk position = new Chunk(", на длъжност ", fontSmallNormal);
-        Chunk employeePosition = new Chunk("СПЕЦИАЛИСТ СОФТУЕРНО ТЕСТВАНЕ", fontSmallBold);
+        Chunk employeePosition = new Chunk(app.getJobNameEmployee(), fontSmallBold);
         fromWhom.add(employeeName);
         fromWhom.add(position);
         fromWhom.add(employeePosition);
@@ -99,7 +85,7 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
 
         Paragraph bestRegards = new Paragraph("С УВАЖЕНИЕ:", fontSmallBold);
 
-        PdfWriter.getInstance(document, new FileOutputStream("application.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream( new File("src/main/resources/documents/ApplicationForVacation.pdf") ));
 
         document.open();
         document.add(forWhom);
@@ -125,7 +111,17 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
 
     }
 
-    public void createContract() throws DocumentException, FileNotFoundException {
+    public void createContract(Long id, HireEmployeeService hireEmployeeService) throws DocumentException, FileNotFoundException {
+        ContractDto contract = hireEmployeeService.createContract(id);
+
+//        ContractDto contract = ContractDto.builder()
+//                .employeeFirstName("Пешката").employeeMiddleName("Пешков").employeeLastName("Пешков")
+//                .employeeEgn("1234567890").employeeLkNumber("99999").employeeLkDate(LocalDate.now())
+//                .employeeLkMvr("гр. София").employeeAddress("гр. Бургас").employeeJobName("Джаварче")
+//                .employeeSalary(10000F).firmName("НАЙ-ДОБРАТА ФИРМА!").firmAddress("гр. София")
+//                .hrFirstName("Ейчар").hrMiddleName("Ейчаров").hrLastName("Ейчаров").hrEgn("88888888888")
+//                .build();
+
         Document document = new Document();
 
         String trudovDogovor = "ТРУДОВ ДОГОВОР";
@@ -135,16 +131,15 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         Paragraph intro = new Paragraph(EMPTY_STRING, fontSmallNormal);
         generateIntroParagraph(intro, fontSmallBold);
 
-        Chunk firmName = new Chunk(FIRM_NAME, fontSmallBold);
+
         Paragraph paragraphFirm = new Paragraph(EMPTY_STRING, fontSmallNormal);
-        generateFirmParagraph(paragraphFirm, fontSmallBold, firmName);
+        generateFirmParagraph(paragraphFirm, fontSmallBold, contract);
 
         Paragraph and = new Paragraph("и", fontSmallNormal);
         and.setAlignment(Element.ALIGN_CENTER);
 
         Paragraph paragraphEmployee = new Paragraph(EMPTY_STRING, fontSmallNormal);
-        generateEmployeeParagraph(paragraphEmployee, fontSmallBold, firmName);
-
+        generateEmployeeParagraph(paragraphEmployee, fontSmallBold, contract);
 
         Paragraph stranite = new Paragraph("(заедно наричани по-долу СТРАНИТЕ).", fontSmallNormal);
         Paragraph sporazumenie = new Paragraph("Предвид предварителните споразумения и уговорките между тях " +
@@ -154,23 +149,23 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         dlujnostHeader.setAlignment(Element.ALIGN_CENTER);
 
         Paragraph dlujnostParagraph = new Paragraph(EMPTY_STRING, fontSmallNormal);
-        generateDlujnostParagraph(dlujnostParagraph, fontSmallBold);
+        generateDlujnostParagraph(dlujnostParagraph, fontSmallBold, contract);
 
         Paragraph vuznagrazhdenieHeader = new Paragraph("2. Възнаграждение", fontSmallBold);
         vuznagrazhdenieHeader.setAlignment(Element.ALIGN_CENTER);
         vuznagrazhdenieHeader.add( Chunk.NEWLINE );
         Paragraph vuznagrazhdenieParagraph = new Paragraph(EMPTY_STRING, fontSmallNormal);
-        generateVuznagrazhdenieParagraph(vuznagrazhdenieParagraph, fontSmallBold);
+        generateVuznagrazhdenieParagraph(vuznagrazhdenieParagraph, fontSmallBold, contract);
 
         Paragraph zaduljeniaHeader = new Paragraph("3. Задължения и изисквания към Страните", fontSmallBold);
         zaduljeniaHeader.setAlignment(Element.ALIGN_CENTER);
         Paragraph zaduljeniaParagraph = new Paragraph(EMPTY_STRING, fontSmallNormal);
-        generateZaduljeniaParagraph(zaduljeniaParagraph, fontSmallBold);
+        generateZaduljeniaParagraph(zaduljeniaParagraph);
 
         Paragraph rabotnoVremeHeader = new Paragraph("4. Работно време и отпуск", fontSmallBold);
         rabotnoVremeHeader.setAlignment(Element.ALIGN_CENTER);
         Paragraph rabotnoVremeParagraph = new Paragraph(EMPTY_STRING, fontSmallNormal);
-        generateRabotnoVremeParagraph(rabotnoVremeParagraph, fontSmallBold);
+        generateRabotnoVremeParagraph(rabotnoVremeParagraph);
 
         Paragraph pridobivkiHeader = new Paragraph("5. Придобивки", fontSmallBold);
         pridobivkiHeader.setAlignment(Element.ALIGN_CENTER);
@@ -220,7 +215,7 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         generatePoluchilEkzempliar(poluchilEkzempliar, fontSmallBold);
 
 
-        PdfWriter.getInstance(document, new FileOutputStream("iTextHelloWorld.pdf"));
+        PdfWriter.getInstance(document, new FileOutputStream(new File("src/main/resources/documents/Contract.pdf")));
 
         document.open();
         document.add(trudovDogovorParagraph);
@@ -356,7 +351,7 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         konfidencialnostParagraph.add(text);
     }
 
-    private void generateRabotnoVremeParagraph(Paragraph rabotnoVremeParagraph, Font fontSmallBold) {
+    private void generateRabotnoVremeParagraph(Paragraph rabotnoVremeParagraph) {
         String text = "4.1 Работният ден се състои от 8 работни часа, в които не се включват почивките през работно време, " +
                 "определени с вътрешна заповед. Работната седмица се състои от 5 работни дни.\n" +
                 "4.2 Служителят ползва платен годишен отпуск в размер на 20 работни дни за една година.\n" +
@@ -364,7 +359,7 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         rabotnoVremeParagraph.add(text);
     }
 
-    private void generateZaduljeniaParagraph(Paragraph zaduljeniaParagraph, Font fontSmallBold) {
+    private void generateZaduljeniaParagraph(Paragraph zaduljeniaParagraph) {
         String threePointOne = "3.1 Служителят се задължава:\n" +
                 "(a) да идва навреме на работа;\n" +
                 "(б) да се явява на работа в състояние, което му позволява да изпълнява възложените му задачи;\n" +
@@ -426,9 +421,9 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         zaduljeniaParagraph.add(Chunk.NEWLINE);
     }
 
-    private void generateVuznagrazhdenieParagraph(Paragraph vuznagrazhdenieParagraph, Font fontSmallBold) {
+    private void generateVuznagrazhdenieParagraph(Paragraph vuznagrazhdenieParagraph, Font fontSmallBold, ContractDto contract) {
         String twoPointOneStart = "2.1 Служителят ще получава основно месечно нетно трудово възнаграждение в размер на ";
-        Chunk salary = new Chunk(Double.toString(EMPLOYEE_SALARY), fontSmallBold);
+        Chunk salary = new Chunk(Double.toString(contract.getEmployeeSalary()), fontSmallBold);
         String twoPointOneEnd = " лева.";
 
         String twoPointTwo = "2.2 Работодателят има право във всеки един момент едностранно да определя и заплаща на Служителя " +
@@ -457,13 +452,15 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         intro.add(" в гр. СОФИЯ, на основание чл. 62 и следващите от Кодекса на труда, се сключи настоящият трудов договор между:");
     }
 
-    private void generateEmployeeParagraph(Paragraph paragraphEmployee, Font fontSmallBold, Chunk firmName) {
-        Chunk employeeName = new Chunk(EMPLOYEE_NAME, fontSmallBold);
-        Chunk employeeEgn = new Chunk(EMPLOYEE_EGN, fontSmallBold);
-        Chunk employeeNumberLK = new Chunk(EMPLOYEE_NUMBER_LK, fontSmallBold);
-        Chunk employeeLkDate = new Chunk(EMPLOYEE_LK_DATE, fontSmallBold);
-        Chunk employeeLkMvr = new Chunk(EMPLOYEE_LK_MVR, fontSmallBold);
-        Chunk employeeAddress = new Chunk(EMPLOYEE_ADDRESS, fontSmallBold);
+    private void generateEmployeeParagraph(Paragraph paragraphEmployee, Font fontSmallBold, ContractDto contract) {
+        Chunk employeeName = new Chunk(contract.getEmployeeFirstName() + " "
+                + contract.getEmployeeMiddleName() + " "
+                + contract.getEmployeeLastName(), fontSmallBold);
+        Chunk employeeEgn = new Chunk(contract.getEmployeeEgn(), fontSmallBold);
+        Chunk employeeNumberLK = new Chunk(contract.getEmployeeLkNumber(), fontSmallBold);
+        Chunk employeeLkDate = new Chunk(contract.getEmployeeLkDate().toString(), fontSmallBold);
+        Chunk employeeLkMvr = new Chunk(contract.getEmployeeLkMvr(), fontSmallBold);
+        Chunk employeeAddress = new Chunk(contract.getEmployeeAddress(), fontSmallBold);
         Chunk employee = new Chunk("СЛУЖИТЕЛ", fontSmallBold);
 
         paragraphEmployee.add(employeeName);
@@ -478,21 +475,22 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         paragraphEmployee.add(", с адрес: ");
         paragraphEmployee.add(employeeAddress);
         paragraphEmployee.add(", служител в ");
-        paragraphEmployee.add(firmName);
+        paragraphEmployee.add(contract.getFirmName());
         paragraphEmployee.add(", с трудов стаж ... , по-долу ");
         paragraphEmployee.add(employee);
 
     }
 
-    private void generateFirmParagraph(Paragraph paragraphFirm, Font fontSmallBold, Chunk firmName) {
-        Chunk firmAddress = new Chunk(FIRM_ADDRESS, fontSmallBold);
-        Chunk firmHrName = new Chunk(FIRM_HR_NAME, fontSmallBold);
-        Chunk firmHrEgn = new Chunk(FIRM_HR_EGN, fontSmallBold);
+    private void generateFirmParagraph(Paragraph paragraphFirm, Font fontSmallBold, ContractDto contract) {
+        Chunk firmName = new Chunk(contract.getFirmName(), fontSmallBold);
+        Chunk firmAddress = new Chunk(contract.getFirmAddress(), fontSmallBold);
+        Chunk firmHrName = new Chunk(contract.getHrFirstName() + " " + contract.getHrMiddleName() + " " + contract.getHrLastName(), fontSmallBold);
+        Chunk firmHrEgn = new Chunk(contract.getHrEgn(), fontSmallBold);
         Chunk firm = new Chunk("РАБОТОДАТЕЛ", fontSmallBold);
         paragraphFirm.add(firmName);
         paragraphFirm.add(" със седалище и адрес на управление: ");
         paragraphFirm.add(firmAddress);
-        paragraphFirm.add(" представлявано от ");
+        paragraphFirm.add(", представлявано от ");
         paragraphFirm.add(firmHrName);
         paragraphFirm.add(", с ЕГН: ");
         paragraphFirm.add(firmHrEgn);
@@ -500,18 +498,19 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         paragraphFirm.add(firm);
     }
 
-    private void generateDlujnostParagraph(Paragraph dlujnostParagraph, Font fontSmallBold) {
+    private void generateDlujnostParagraph(Paragraph dlujnostParagraph, Font fontSmallBold, ContractDto contract) {
 
         String onePointOneStart = "1.1 Работодателят назначава Служителя, а Служителят се съгласява да започне работа при " +
                 "Работодателя на ";
         Chunk todayChunk = new Chunk(LocalDate.now().toString(), fontSmallBold);
-        Chunk dlujnost = new Chunk(" 123456 - СПЕЦИАЛИСТ СОФТУЕРНО ТЕСТВАНЕ ", fontSmallBold);
+        String naDlujnost = " на длъжност, съгласно НКПД - ";
+        Chunk dlujnost = new Chunk(contract.getEmployeeJobName(), fontSmallBold);
         String onePointOneEnd = ". Подробно " +
                 "описание на изискванията и критериите за заемане на тази позиция се съдържа в длъжностната " +
                 "характеристика, одобрена от Работодателя и приложена като неразделна част към настоящия договор.";
 
         String onePointTwoStart = "1.2 Мястото на работата на Служителя е в ";
-        Chunk firmAddress = new Chunk(FIRM_ADDRESS, fontSmallBold);
+        Chunk firmAddress = new Chunk(contract.getFirmAddress(), fontSmallBold);
         String onePointTwoEnd = ", а работното място е в централния офис на Дружеството.";
 
         String onePointThree = "1.3 Работодателят си запазва правото /при съмнение за злоупотреба/ да следи: трафика на Служителя от " +
@@ -521,6 +520,7 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
 
         dlujnostParagraph.add(onePointOneStart);
         dlujnostParagraph.add(todayChunk);
+        dlujnostParagraph.add(naDlujnost);
         dlujnostParagraph.add(dlujnost);
         dlujnostParagraph.add(onePointOneEnd);
         dlujnostParagraph.add( Chunk.NEWLINE );

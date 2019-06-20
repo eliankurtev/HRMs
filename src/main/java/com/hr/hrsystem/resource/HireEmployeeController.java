@@ -2,20 +2,22 @@ package com.hr.hrsystem.resource;
 
 import com.hr.hrsystem.dto.EmployeeDto;
 import com.hr.hrsystem.model.Person;
+import com.hr.hrsystem.model.Employee;
 import com.hr.hrsystem.service.GradeService;
 import com.hr.hrsystem.service.HireEmployeeService;
+import com.hr.hrsystem.service.PdfCreatorService;
 import com.hr.hrsystem.service.SkillService;
 import com.hr.hrsystem.service.PersonService;
+import com.hr.hrsystem.service.impl.PdfCreatorServiceImpl;
+import com.itextpdf.text.DocumentException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.FileNotFoundException;
 import java.util.List;
 
 @RestController
@@ -51,6 +53,29 @@ public class HireEmployeeController {
         boolean hireEmployee = hireEmployeeService.hireEmployee(testDTO);
         return new ResponseEntity<>(hireEmployee, HttpStatus.OK);
     }
+
+    @RequestMapping("/createContract")
+    @ResponseBody
+    String homeContract() {
+        try {
+            Employee hr = null;
+            createContract(1L, hireEmployeeService);
+            return "PDF Created!";
+        } catch (Exception ex) {
+            return "Error in creating pdf: " + ex;
+        }
+    }
+
+    private void createContract(Long id, HireEmployeeService hireEmployeeService) {
+        PdfCreatorServiceImpl pdfCreatorService = new PdfCreatorServiceImpl();
+        try {
+            pdfCreatorService.createContract(id, hireEmployeeService);
+        } catch (DocumentException | FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     @RequestMapping(value = "/addPerson", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,

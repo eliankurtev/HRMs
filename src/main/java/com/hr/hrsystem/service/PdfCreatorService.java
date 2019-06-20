@@ -5,6 +5,6 @@ import com.itextpdf.text.DocumentException;
 import java.io.FileNotFoundException;
 
 public interface PdfCreatorService {
-    void createApplication(Long id) throws FileNotFoundException, DocumentException;
-    void createContract() throws DocumentException, FileNotFoundException;
+    void createApplication(Long id, HireEmployeeService hireEmployeeService) throws FileNotFoundException, DocumentException;
+    void createContract(Long id, HireEmployeeService hireEmployeeService) throws DocumentException, FileNotFoundException;
 }
