@@ -48,6 +48,7 @@ public class TransformationServiceImpl implements TransformationService {
                 .workingDays(employee.getWorkingDays())
                 .vacationDays(employee.getVacationDays())
                 .startDate(employee.getStartDate().toString())
+                .jobId(employee.getJobNumber().getJobId())
                 .skill(employee.getSkills().stream().map(Skill::getName).collect(Collectors.toList()))
                 .build();
     }

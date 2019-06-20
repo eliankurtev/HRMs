@@ -34,8 +34,7 @@ public class Employee {
 
     @Column(name = "job_number")
     @NotNull
-    @Max(value = 9)
-    private Integer jobNumber;
+    private JobType jobNumber;
 
     @Column(name = "working_hours")
     @NotNull
@@ -82,11 +81,12 @@ public class Employee {
 
     @Builder(builderMethodName = "employeeBuilder")
     public Employee(String email, String startDate, Integer vacationDays,
-                    Integer workingHours, Integer workingDays) {
+                    Integer workingHours, Integer workingDays, JobType jobNumber) {
         this.startDate = LocalDate.parse(startDate);
         this.vacationDays = vacationDays;
         this.workingDays = workingDays;
         this.workingHours = workingHours;
+        this.jobNumber = jobNumber;
     }
 
     @Override

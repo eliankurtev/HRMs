@@ -18,9 +18,8 @@ public class Position {
     private String name;
 
     @Column
-    @Max(value = 8)
     //НКПИД
-    private Integer jobid;
+    private JobType jobid;
 
     @ManyToMany(mappedBy = "positions")
     private List<Employee> employees;

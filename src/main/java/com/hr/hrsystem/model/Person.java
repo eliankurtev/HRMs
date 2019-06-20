@@ -48,7 +48,7 @@ public class Person {
     private Status status;
 
     @Column
-    @NotNull
+//    @NotNull
     @Email
     private String email;
 

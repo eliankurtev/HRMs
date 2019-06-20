@@ -3,7 +3,6 @@ package com.hr.hrsystem.dto;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 
-import javax.validation.constraints.Max;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -22,7 +21,7 @@ public class EmployeeDto extends PersonDto {
 
     private Integer vacationDays;
 
-    private Integer jobNumber;
+    private Integer jobId;
 
     private Integer workingHours;
 
@@ -37,11 +36,12 @@ public class EmployeeDto extends PersonDto {
 
     @Builder(builderMethodName = "employeeDtoBuilder")
     private EmployeeDto(String id, String firstName, String middleName, String lastName,
-                        String gender, String address,
+                        String gender, String address, Integer jobId,
                         String email, String startDate, Integer vacationDays,
                         Integer workingHours, Integer workingDays, Float salary, String grade, List<String> skill) {
         super(id, firstName, middleName, lastName, gender, address);
         this.email = email;
+        this.jobId = jobId;
         this.startDate = startDate;
         this.vacationDays = vacationDays;
         this.workingDays = workingDays;
