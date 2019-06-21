@@ -85,6 +85,16 @@ public class TransformationServiceImpl implements TransformationService {
     }
 
     @Override
+    public List<EmployeeDto> getFiredEmployeeDtos() {
+        List<Employee> employees = employeeService.findAllFired();
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+
+        employees.forEach(e -> employeeDtos.add(employeeToDto(e)));
+
+        return employeeDtos;
+    }
+
+    @Override
     public Position dtoToPosition(PositionDto positionDto){
         return Position.builder()
                 .name(positionDto.getName())
