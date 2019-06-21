@@ -1,20 +1,23 @@
 package com.hr.hrsystem.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.*;
 
 import java.time.LocalDate;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
-@ToString(callSuper = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@ToString(callSuper = true)
+@EqualsAndHashCode(callSuper = true)
 public class EmployeeDto extends PersonDto {
 
     private String email;
 
+    @JsonFormat(pattern = "####-##-##")
     private String startDate;
 
     private LocalDate endDate;
@@ -32,7 +35,10 @@ public class EmployeeDto extends PersonDto {
     private String grade;
 
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+    @JsonDeserialize
     private List<String> skill;
+
+    private Boolean show;
 
     @Builder(builderMethodName = "employeeDtoBuilder")
     private EmployeeDto(String id, String firstName, String middleName, String lastName,

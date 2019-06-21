@@ -18,5 +18,7 @@ public interface EmployeeService {
     List<Employee> findAll();
 
 
+    List<Employee> findAllFired();
+
     Employee findOneById(String id);
 }

@@ -71,4 +71,14 @@ public class TransformationServiceImpl implements TransformationService {
 
         return employeeDtos;
     }
+
+    @Override
+    public List<EmployeeDto> getFiredEmployeeDtos() {
+        List<Employee> employees = employeeService.findAllFired();
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+
+        employees.forEach(e -> employeeDtos.add(employeeToDto(e)));
+
+        return employeeDtos;
+    }
 }
