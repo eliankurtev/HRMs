@@ -1,6 +1,7 @@
 package com.hr.hrsystem.service.impl;
 
 import com.hr.hrsystem.model.Grade;
+import com.hr.hrsystem.model.Position;
 import com.hr.hrsystem.repository.GradeRepository;
 import com.hr.hrsystem.service.GradeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,4 +29,10 @@ public class GradeServiceImpl implements GradeService {
     public Grade findByName(String name){
         return gradeRepository.findByName(name).isPresent() ? gradeRepository.findByName(name).get() : null;
     }
+
+    @Override
+    public List<Grade> findAllByName(List<String> names){
+        return names.stream().map(this::findByName).collect(Collectors.toList());
+    }
+
 }

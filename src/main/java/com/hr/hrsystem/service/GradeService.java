@@ -11,4 +11,6 @@ public interface GradeService {
     List<String> findAllNames();
 
     Grade findByName(String name);
+
+    List<Grade> findAllByName(List<String> names);
 }

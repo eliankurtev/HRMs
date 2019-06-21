@@ -1,7 +1,11 @@
 package com.hr.hrsystem.service;
 
 import com.hr.hrsystem.dto.EmployeeDto;
+import com.hr.hrsystem.dto.PositionDto;
+import com.hr.hrsystem.dto.ProjectDto;
 import com.hr.hrsystem.model.Employee;
+import com.hr.hrsystem.model.Position;
+import com.hr.hrsystem.model.Project;
 
 import java.util.List;
 
@@ -13,4 +17,8 @@ public interface TransformationService {
     List<EmployeeDto> getEmployeeDtos(List<Employee> employees);
 
     List<EmployeeDto> getEmployeeDtos();
+
+    Position dtoToPosition(PositionDto positionDto);
+
+    Project dtoToProject(ProjectDto projectDto);
 }

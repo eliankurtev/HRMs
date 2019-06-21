@@ -76,7 +76,7 @@
             <column type="varchar" name="name"/>
             <column type="bigint" name="department"/>
             <column type="bigint" name="employee"/>
-            <column type="int" name="jobID"/>
+            <column type="int" name="job_number"/>
         </createTable>
         <createTable tableName="project">
             <column type="bigint" name="id" autoIncrement="true">
