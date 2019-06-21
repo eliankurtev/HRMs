@@ -1,12 +1,12 @@
 package com.hr.hrsystem.model;
 
-import lombok.*;
-import org.hibernate.validator.constraints.Length;
+import lombok.Builder;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.Max;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.List;
@@ -49,6 +49,9 @@ public class Employee {
 
     @Column
     private String password;
+
+    @Column(name = "is_fired")
+    private Boolean isFired;
 
     @OneToOne
     @JoinColumn(name = "id")

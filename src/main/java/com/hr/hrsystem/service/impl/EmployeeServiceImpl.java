@@ -30,7 +30,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> findAll() {
-        return employeeRepository.findAll();
+        return employeeRepository.findAllByIsFiredFalse();
+    }
+
+    @Override
+    public List<Employee> findAllFired() {
+        return employeeRepository.findAllByIsFiredTrue();
     }
 
     @Override

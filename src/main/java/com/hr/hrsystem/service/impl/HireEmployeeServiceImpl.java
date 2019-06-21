@@ -8,6 +8,7 @@ import com.hr.hrsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
 
@@ -57,7 +58,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
         employee.setSecurityData(securityData);
 
         List<Skill> skill = skillService.getByName(employeeDto.getSkill());
-        if(Objects.nonNull(skill)){
+        if (Objects.nonNull(skill)) {
             employee.setSkills(skill);
         }
 
@@ -110,5 +111,56 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
                 .hrLastName(employee.getPerson().getLastName())
                 .hrEgn(employee.getSecurityData().getEgn().toString())
                 .build();
+    }
+
+
+    @Override
+    public boolean updateEmployee(EmployeeDto employeeDto) {
+
+        Person person = personService.findById(Long.parseLong(employeeDto.getId()));
+                person.setAddress(employeeDto.getAddress());
+                person.setFirstName(employeeDto.getFirstName());
+                person.setMiddleName(employeeDto.getMiddleName());
+                person.setLastName(employeeDto.getLastName());
+                person.setGender(employeeDto.getGender());
+                person.setEmail(employeeDto.getEmail());
+
+
+        boolean isSavedPerson =  personService.savePerson(person);
+
+        Employee employee = employeeService.findOneById(employeeDto.getId());
+                employee.setStartDate(LocalDate.parse(employeeDto.getStartDate()));
+                employee.setVacationDays(employeeDto.getVacationDays());
+                employee.setWorkingDays(employeeDto.getWorkingDays());
+                employee.setWorkingHours(employeeDto.getWorkingHours());
+
+        employee.setPerson(person);
+
+        SecurityData securityData = employee.getSecurityData();
+        securityData.setSalary(employeeDto.getSalary());
+        SecurityData save = securityDataService.save(securityData);
+        boolean isSavedSecurity = Objects.nonNull(save);
+
+        employee.setSecurityData(securityData);
+
+        Grade grade = gradeService.findByName(employeeDto.getGrade());
+        employee.setGrade(grade);
+
+        List<Skill> skill = skillService.getByName(employeeDto.getSkill());
+        if (Objects.nonNull(skill)) {
+            employee.setSkills(skill);
+        }
+
+
+
+        Employee saveEmployee = employeeService.saveEmployee(employee);
+        boolean isSavedEmployee = Objects.nonNull(saveEmployee);
+
+        return isSavedEmployee && isSavedPerson && isSavedSecurity;
+    }
+
+    @Override
+    public void updateEmployees(List<EmployeeDto> employeeDtos) {
+        employeeDtos.forEach(this::updateEmployee);
     }
 }

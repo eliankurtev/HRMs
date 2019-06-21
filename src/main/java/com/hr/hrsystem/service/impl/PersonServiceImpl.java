@@ -17,4 +17,9 @@ public class PersonServiceImpl implements PersonService {
     public boolean savePerson(Person person){
         return Objects.nonNull(personRepository.save(person));
     }
+
+    @Override
+    public Person findById(Long id){
+        return personRepository.findById(id).isPresent() ? personRepository.findById(id).get() : null;
+    }
 }

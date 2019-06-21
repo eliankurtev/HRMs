@@ -48,7 +48,7 @@ public class HireEmployeeController {
     @RequestMapping(value = "/hire", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Boolean> getGrades(@RequestBody EmployeeDto testDTO) {
+    public ResponseEntity<Boolean> hireEmployee(@RequestBody EmployeeDto testDTO) {
         log.info(testDTO.toString());
         boolean hireEmployee = hireEmployeeService.hireEmployee(testDTO);
         return new ResponseEntity<>(hireEmployee, HttpStatus.OK);

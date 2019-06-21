@@ -6,7 +6,7 @@
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-1.7.xsd">
     <changeSet author="Rumyana Krumova" id="20190619-1">
         <addColumn tableName="employee">
-            <column name="is_fired" type="boolean"/>
+            <column name="is_fired" type="boolean" defaultValue="false"/>
         </addColumn>
         <addColumn tableName="employee">
             <column name="username" type="varchar"/>

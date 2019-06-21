@@ -1,6 +1,9 @@
 package com.hr.hrsystem.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
@@ -9,6 +12,9 @@ import java.util.List;
 
 @Entity
 @Data
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Position {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +23,9 @@ public class Position {
     @Column
     private String name;
 
-    @Column
+    @Column(name = "job_number")
     //НКПИД
-    private JobType jobid;
+    private JobType jobID;
 
     @ManyToMany(mappedBy = "positions")
     private List<Employee> employees;

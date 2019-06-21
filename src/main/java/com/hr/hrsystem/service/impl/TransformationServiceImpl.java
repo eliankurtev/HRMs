@@ -2,14 +2,14 @@ package com.hr.hrsystem.service.impl;
 
 import com.hr.hrsystem.dto.EmployeeDto;
 import com.hr.hrsystem.dto.PersonDto;
-import com.hr.hrsystem.model.Employee;
-import com.hr.hrsystem.model.Person;
-import com.hr.hrsystem.model.Skill;
-import com.hr.hrsystem.service.EmployeeService;
-import com.hr.hrsystem.service.TransformationService;
+import com.hr.hrsystem.dto.PositionDto;
+import com.hr.hrsystem.dto.ProjectDto;
+import com.hr.hrsystem.model.*;
+import com.hr.hrsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -19,6 +19,18 @@ import java.util.stream.Collectors;
 public class TransformationServiceImpl implements TransformationService {
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    private DepartmentService departmentService;
+
+    @Autowired
+    private PositionService positionService;
+
+    @Autowired
+    private SkillService skillService;
+
+    @Autowired
+    private GradeService gradeService;
 
     @Override
     public EmployeeDto getById(String id) {
@@ -71,4 +83,36 @@ public class TransformationServiceImpl implements TransformationService {
 
         return employeeDtos;
     }
+
+    @Override
+    public List<EmployeeDto> getFiredEmployeeDtos() {
+        List<Employee> employees = employeeService.findAllFired();
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+
+        employees.forEach(e -> employeeDtos.add(employeeToDto(e)));
+
+        return employeeDtos;
+    }
+
+    @Override
+    public Position dtoToPosition(PositionDto positionDto){
+        return Position.builder()
+                .name(positionDto.getName())
+                .department(departmentService.findOneByName(positionDto.getDepartment()))
+                .jobID(JobType.findByJobId(positionDto.getJobId()))
+                .build();
+    }
+
+    @Override
+    public Project dtoToProject(ProjectDto projectDto){
+        return Project.builder()
+                .name(projectDto.getName())
+                .positions(positionService.findAllByName(projectDto.getPositions()))
+                .grades(gradeService.findAllByName(projectDto.getGrades()))
+                .startDate(LocalDate.parse(projectDto.getStartingDate()))
+                .skills(skillService.getByName(projectDto.getSkills()))
+                .department(departmentService.findOneByName(projectDto.getDepartment()))
+                .build();
+    }
+
 }
