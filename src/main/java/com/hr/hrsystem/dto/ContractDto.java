@@ -13,7 +13,9 @@ import java.time.LocalDate;
 @AllArgsConstructor
 public class ContractDto {
     private String firmName;
+    private String firmCity;
     private String firmAddress;
+    private String firmEik;
     private String hrFirstName;
     private String hrMiddleName;
     private String hrLastName;
@@ -29,4 +31,7 @@ public class ContractDto {
     private String employeeAddress;
     private String employeeJobName;
     private Float employeeSalary;
+    private String employeeYearsOfLabour;
+    private String employeeMonthsOfLabour;
+    private String employeeDaysOfLabour;
 }

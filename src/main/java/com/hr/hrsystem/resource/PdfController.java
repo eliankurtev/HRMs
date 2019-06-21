@@ -1,13 +1,14 @@
 package com.hr.hrsystem.resource;
 
 
+import com.hr.hrsystem.dto.ApplicationForVacationDto;
+import com.hr.hrsystem.dto.ApplicationForVacationFEDto;
 import com.hr.hrsystem.service.HireEmployeeService;
 import com.hr.hrsystem.service.impl.PdfCreatorServiceImpl;
 import com.itextpdf.text.DocumentException;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.FileNotFoundException;
 
@@ -17,11 +18,13 @@ public class PdfController {
     @Autowired
     private HireEmployeeService hireEmployeeService;
 
-    @RequestMapping("/createApplication")
+    @RequestMapping(value = "/createApplication",  method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @ResponseBody
-    String homeApplication() {
+    String homeApplication(@RequestBody ApplicationForVacationFEDto applicationDto) {
         try {
-            createApplication(1L, hireEmployeeService);
+            createApplication(1L, hireEmployeeService, applicationDto);
             return "PDF Created!";
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -29,13 +32,11 @@ public class PdfController {
         }
     }
 
-    private void createApplication(Long id, HireEmployeeService hireEmployeeService) {
+    private void createApplication(Long id, HireEmployeeService hireEmployeeService, ApplicationForVacationFEDto applicationDto) {
         PdfCreatorServiceImpl pdf = new PdfCreatorServiceImpl();
         try {
-            pdf.createApplication(id, hireEmployeeService);
-        } catch (DocumentException e) {
-            e.printStackTrace();
-        } catch (FileNotFoundException e) {
+            pdf.createApplication(id, hireEmployeeService, applicationDto);
+        } catch (DocumentException | FileNotFoundException e) {
             e.printStackTrace();
         }
     }

@@ -1,6 +1,7 @@
 package com.hr.hrsystem.service.impl;
 
 import com.hr.hrsystem.dto.ApplicationForVacationDto;
+import com.hr.hrsystem.dto.ApplicationForVacationFEDto;
 import com.hr.hrsystem.dto.ContractDto;
 import com.hr.hrsystem.service.HireEmployeeService;
 import com.hr.hrsystem.service.PdfCreatorService;
@@ -41,11 +42,8 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
     }
 
 
-    public void createApplication(Long id, HireEmployeeService hireEmployeeService) throws FileNotFoundException, DocumentException {
+    public void createApplication(Long id, HireEmployeeService hireEmployeeService, ApplicationForVacationFEDto applicationDto) throws FileNotFoundException, DocumentException {
         ApplicationForVacationDto app = hireEmployeeService.createApplicationForVacation(id);
-//        ApplicationForVacationDto app = ApplicationForVacationDto.builder()
-//                .firstNameEmployee("Пешката").secondNameEmployee("Пешков").lastNameEmployee("Пешков").firmName("Най-добрата фирма!")
-//                .jobNameEmployee("Джавар").build();
 
         Document document = new Document();
 
@@ -73,9 +71,9 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
         Chunk startLetter = new Chunk("Уважаеми г-н/г-жо Управител,\n\n" +
                 "Моля, да ми бъде разрешено да ползвам платен годишен отпуск на основание чл.155, ал.1 /" +
                 "чл.155, ал.5 (и чл.156) от КТ от ");
-        Chunk daysOff = new Chunk("1234", fontSmallBold);
+        Chunk daysOff = new Chunk(applicationDto.getVacationDays(), fontSmallBold);
         Chunk thatStart = new Chunk(" дни с начало: ", fontSmallNormal);
-        Chunk date = new Chunk(LocalDate.now().toString(), fontSmallBold);
+        Chunk date = new Chunk(applicationDto.getStartDate().toString(), fontSmallBold);
         letter.add(startLetter);
         letter.add(daysOff);
         letter.add(thatStart);
@@ -458,36 +456,42 @@ public class PdfCreatorServiceImpl implements PdfCreatorService {
                 + contract.getEmployeeLastName(), fontSmallBold);
         Chunk employeeEgn = new Chunk(contract.getEmployeeEgn(), fontSmallBold);
         Chunk employeeNumberLK = new Chunk(contract.getEmployeeLkNumber(), fontSmallBold);
-        Chunk employeeLkDate = new Chunk(contract.getEmployeeLkDate().toString(), fontSmallBold);
-        Chunk employeeLkMvr = new Chunk(contract.getEmployeeLkMvr(), fontSmallBold);
+        Chunk employeeYearsOfLabour = new Chunk(contract.getEmployeeYearsOfLabour(), fontSmallBold);
+        Chunk employeeMonthsOfLabour = new Chunk(contract.getEmployeeMonthsOfLabour(), fontSmallBold);
+        Chunk employeeDaysOfLabour = new Chunk(contract.getEmployeeDaysOfLabour(), fontSmallBold);
         Chunk employeeAddress = new Chunk(contract.getEmployeeAddress(), fontSmallBold);
         Chunk employee = new Chunk("СЛУЖИТЕЛ", fontSmallBold);
 
         paragraphEmployee.add(employeeName);
         paragraphEmployee.add(", с ЕГН: ");
         paragraphEmployee.add(employeeEgn);
-        paragraphEmployee.add(", с лична карта ");
+        paragraphEmployee.add(", с лична карта номер ");
         paragraphEmployee.add(employeeNumberLK);
-        paragraphEmployee.add(", изд. на ");
-        paragraphEmployee.add(employeeLkDate);
-        paragraphEmployee.add(" от ");
-        paragraphEmployee.add(employeeLkMvr);
         paragraphEmployee.add(", с адрес: ");
         paragraphEmployee.add(employeeAddress);
         paragraphEmployee.add(", служител в ");
         paragraphEmployee.add(contract.getFirmName());
-        paragraphEmployee.add(", с трудов стаж ... , по-долу ");
+        paragraphEmployee.add(", с трудов стаж ");
+        paragraphEmployee.add(employeeYearsOfLabour);
+        paragraphEmployee.add(" год. ");
+        paragraphEmployee.add(employeeMonthsOfLabour);
+        paragraphEmployee.add(" мес. ");
+        paragraphEmployee.add(employeeDaysOfLabour);
+        paragraphEmployee.add(" дни., по-долу ");
         paragraphEmployee.add(employee);
 
     }
 
     private void generateFirmParagraph(Paragraph paragraphFirm, Font fontSmallBold, ContractDto contract) {
         Chunk firmName = new Chunk(contract.getFirmName(), fontSmallBold);
-        Chunk firmAddress = new Chunk(contract.getFirmAddress(), fontSmallBold);
+        Chunk firmAddress = new Chunk(contract.getFirmCity() + ", " + contract.getFirmAddress(), fontSmallBold);
+        Chunk firmEik = new Chunk(contract.getFirmEik(), fontSmallBold);
         Chunk firmHrName = new Chunk(contract.getHrFirstName() + " " + contract.getHrMiddleName() + " " + contract.getHrLastName(), fontSmallBold);
         Chunk firmHrEgn = new Chunk(contract.getHrEgn(), fontSmallBold);
         Chunk firm = new Chunk("РАБОТОДАТЕЛ", fontSmallBold);
         paragraphFirm.add(firmName);
+        paragraphFirm.add(", ЕИК ");
+        paragraphFirm.add(firmEik);
         paragraphFirm.add(" със седалище и адрес на управление: ");
         paragraphFirm.add(firmAddress);
         paragraphFirm.add(", представлявано от ");

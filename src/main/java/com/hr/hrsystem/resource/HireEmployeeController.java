@@ -62,7 +62,8 @@ public class HireEmployeeController {
             createContract(1L, hireEmployeeService);
             return "PDF Created!";
         } catch (Exception ex) {
-            return "Error in creating pdf: " + ex;
+            ex.printStackTrace();
+            return "Error in creating pdf: ";
         }
     }
 
@@ -75,8 +76,6 @@ public class HireEmployeeController {
         }
     }
 
-
-
     @RequestMapping(value = "/addPerson", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -85,5 +84,4 @@ public class HireEmployeeController {
         boolean addPerson = personService.savePerson(testDTO);
         return new ResponseEntity<>(addPerson, HttpStatus.OK);
     }
-
 }
