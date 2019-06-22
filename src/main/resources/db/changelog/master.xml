@@ -10,4 +10,5 @@
     <include file="db/changelog/liquibase/20190518-1-insert-into-tables.xml"/>
     <include file="db/changelog/liquibase/20190618-1-add-company-in-employee.xml"/>
     <include file="db/changelog/liquibase/20190619-1-add-columns.xml"/>
+    <include file="db/changelog/liquibase/20190622-1-insert-into-tables.xml"/>
 </databaseChangeLog>
