@@ -1,8 +1,6 @@
 package com.hr.hrsystem.resource;
 
 import com.hr.hrsystem.dto.EmployeeDto;
-import com.hr.hrsystem.model.Employee;
-import com.hr.hrsystem.service.EmployeeService;
 import com.hr.hrsystem.service.HireEmployeeService;
 import com.hr.hrsystem.service.TransformationService;
 import lombok.extern.slf4j.Slf4j;

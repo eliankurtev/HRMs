@@ -1,6 +1,8 @@
 package com.hr.hrsystem.resource;
 
+import com.hr.hrsystem.dto.CompanyDto;
 import com.hr.hrsystem.dto.EmailDto;
+import com.hr.hrsystem.model.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.HttpStatus;
@@ -80,7 +82,11 @@ public class SendEmailController {
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setTo(emailDto.getEmail());
-        helper.setText("<html><body>Hello " + emailDto.getName() + ",<br/><br/>We want to invite you on interview on " + emailDto.getInterviewDate() + ". <br/><br/>Thank you,<br/>HRMS team", true);
+        String date =  emailDto.getInterviewDate();
+        String newDate = date.replaceAll("T"," ");
+        String finalDate= newDate.replaceAll(".000Z","");
+
+        helper.setText("<html><body><i>Dear,</i> <b>" + emailDto.getName() + "</b><i>,</i><br/><i>We want to invite you on interview on </i><b>" + finalDate + "</b><i>.</br>"+"<br/> Our address is </i>"+"<b>Kyustendil, Dupnishsko shose 18, fl.5</b><i>."+"<br/><br/>Thank you,<br/>HRMs team!</i><br/><br/> This email is automatically generated! Please do not respond!", true);
         helper.setSubject("Invite for interview");
 
         sender.send(message);
