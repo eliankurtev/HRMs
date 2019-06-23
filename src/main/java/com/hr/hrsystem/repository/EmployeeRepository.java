@@ -7,5 +7,5 @@ import java.util.List;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findAllByIsFiredTrue();
-    List<Employee> findAllByIsFiredFalse();
+    List<Employee> findAllByIsFiredFalseOrIsFiredIsNull();
 }

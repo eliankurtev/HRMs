@@ -6,6 +6,7 @@ import com.hr.hrsystem.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service
@@ -30,7 +31,7 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> findAll() {
-        return employeeRepository.findAllByIsFiredFalse();
+        return employeeRepository.findAllByIsFiredFalseOrIsFiredIsNull();
     }
 
     @Override
@@ -41,5 +42,13 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findOneById(String id) {
         return employeeRepository.findById(Long.parseLong(id)).isPresent() ? employeeRepository.findById(Long.parseLong(id)).get() : null;
+    }
+
+    @Override
+    public Employee fireEmployee(String id) {
+        Employee employee = findOneById(id);
+        employee.setIsFired(true);
+        employee.setEndDate(LocalDate.now());
+        return saveEmployee(employee);
     }
 }
