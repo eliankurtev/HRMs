@@ -40,12 +40,12 @@ public class SendEmailController {
     @RequestMapping(value = "/sendInterviewInvite", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    ResponseEntity<String> sendInterviewInvite(@RequestBody EmailDto emailDto) {
+    ResponseEntity<Boolean> sendInterviewInvite(@RequestBody EmailDto emailDto) {
         try {
             sendInterview(emailDto);
-            return new ResponseEntity<>("Success", HttpStatus.OK);
+            return new ResponseEntity<>(true, HttpStatus.OK);
         } catch (Exception ex) {
-            return new ResponseEntity<>("Error in sending email: " + ex, HttpStatus.EXPECTATION_FAILED);
+            return new ResponseEntity<>(false, HttpStatus.EXPECTATION_FAILED);
         }
     }
 

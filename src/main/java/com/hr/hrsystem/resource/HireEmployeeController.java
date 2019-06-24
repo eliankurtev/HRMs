@@ -85,10 +85,10 @@ public class HireEmployeeController {
     @RequestMapping(value = "/addPerson", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseEntity<Boolean> addPerson(@RequestBody Person testDTO) {
+    public ResponseEntity<Long> addPerson(@RequestBody Person testDTO) {
         log.info(testDTO.toString());
-        boolean addPerson = personService.savePerson(testDTO);
-        return new ResponseEntity<>(addPerson, HttpStatus.OK);
+        Long personId = personService.savePerson(testDTO);
+        return new ResponseEntity<>(personId, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/updateEmployeeJob", method = RequestMethod.POST,

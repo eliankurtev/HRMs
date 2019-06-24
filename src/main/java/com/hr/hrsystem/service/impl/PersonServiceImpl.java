@@ -15,8 +15,10 @@ public class PersonServiceImpl implements PersonService {
     private PersonRepository personRepository;
 
     @Override
-    public boolean savePerson(Person person){
-        return Objects.nonNull(personRepository.save(person));
+    public Long savePerson(Person person){
+        person = personRepository.save(person);
+        personRepository.flush();
+        return person.getId();
     }
 
     @Override

@@ -7,7 +7,7 @@ import java.util.List;
 public interface PersonService {
     Person findById(Long id);
 
-    boolean savePerson(Person person);
+    Long savePerson(Person person);
 
     List<Person> getAllByNameContaining(String substring);
 }

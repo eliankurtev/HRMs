@@ -45,7 +45,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
                 .gender(employeeDto.getGender())
                 .email(employeeDto.getEmail())
                 .build();
-        boolean isSavedPerson = personService.savePerson(person);
+        Long personId = personService.savePerson(person);
 
         JobType job = JobType.valueOf(employeeDto.getJobName());
         System.out.println(job.getJobId());
@@ -81,7 +81,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
         Employee saveEmployee = employeeService.saveEmployee(employee);
         boolean isSavedEmployee = Objects.nonNull(saveEmployee);
 
-        return isSavedEmployee && isSavedPerson && isSavedSecurity;
+        return isSavedEmployee && personId > 0 && isSavedSecurity;
     }
 
     @Override
@@ -139,7 +139,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
                 person.setEmail(employeeDto.getEmail());
 
 
-        boolean isSavedPerson =  personService.savePerson(person);
+        Long personId =  personService.savePerson(person);
 
         Employee employee = employeeService.findOneById(employeeDto.getId());
                 employee.setStartDate(LocalDate.parse(employeeDto.getStartDate()));
@@ -170,7 +170,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
         Employee saveEmployee = employeeService.saveEmployee(employee);
         boolean isSavedEmployee = Objects.nonNull(saveEmployee);
 
-        return isSavedEmployee && isSavedPerson && isSavedSecurity;
+        return isSavedEmployee && personId > 0 && isSavedSecurity;
     }
 
     @Override
