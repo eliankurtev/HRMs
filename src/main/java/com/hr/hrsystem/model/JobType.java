@@ -5,7 +5,8 @@ import java.util.Arrays;
 
 public enum JobType {
     JAVA_SOFTWARE_DEVELOPER(1),
-    HR(2);
+    HR(2),
+    BENCH(3);
 
     private Integer jobId;
 

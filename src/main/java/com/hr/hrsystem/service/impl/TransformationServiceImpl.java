@@ -136,8 +136,19 @@ public class TransformationServiceImpl implements TransformationService {
                 .build();
     }
 
+    @Override
     public List<EmployeeDto> getHrEmployeeDtos() {
         List<Employee> employees = employeeService.findAllHrs();
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+
+        employees.forEach(e -> employeeDtos.add(employeeToDto(e)));
+
+        return employeeDtos;
+    }
+
+    @Override
+    public List<EmployeeDto> getBenchEmployeeDtos() {
+        List<Employee> employees = employeeService.findAllBenchEmployees();
         List<EmployeeDto> employeeDtos = new ArrayList<>();
 
         employees.forEach(e -> employeeDtos.add(employeeToDto(e)));

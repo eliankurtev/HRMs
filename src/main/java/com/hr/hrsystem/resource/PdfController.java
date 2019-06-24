@@ -25,6 +25,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
+@RequestMapping(name = "/employee")
 public class PdfController {
 
     @Autowired
@@ -50,7 +51,7 @@ public class PdfController {
     String homeApplication(@RequestBody ApplicationForVacationFEDto applicationDto) {
         try {
             createApplication(1L, hireEmployeeService, applicationDto);
-            sendEmail(applicationDto.getHrName());
+            sendEmail(applicationDto.getHrName(), applicationDto.getHrEmail());
             return "PDF Created!";
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -67,12 +68,12 @@ public class PdfController {
         }
     }
 
-    private void sendEmail(String name) throws Exception {
+    private void sendEmail(String name, String email) throws Exception {
         MimeMessage message = sender.createMimeMessage();
         // Enable the multipart flag!
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setTo("cuwabaleba@emailate.com");
+        helper.setTo("poxuyocaci@kikoxltd.com" );
         helper.setText("Hello, " + name + "! <html><body><p>Here is my application for vacation! I hope you will confirm it as soon as possible!</p> <p>Greetings!</p><body></html>", true);
         helper.setSubject("Hi");
         helper.addAttachment("ApplicationForVacation.pdf", new File("src/main/resources/documents/ApplicationForVacation.pdf"));

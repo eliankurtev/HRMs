@@ -3,7 +3,7 @@ package com.hr.hrsystem.service;
 import com.hr.hrsystem.dto.ApplicationForVacationDto;
 import com.hr.hrsystem.dto.ContractDto;
 import com.hr.hrsystem.dto.EmployeeDto;
-import com.hr.hrsystem.model.Employee;
+import com.hr.hrsystem.model.JobType;
 
 import java.util.List;
 
@@ -17,4 +17,6 @@ public interface HireEmployeeService {
     ApplicationForVacationDto createApplicationForVacation(Long employeeId);
 
     ContractDto createContract(Long employeeId);
+
+    List<JobType> getJobTypes();
 }

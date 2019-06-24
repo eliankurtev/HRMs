@@ -15,4 +15,5 @@ public class ApplicationForVacationFEDto {
     private String vacationDays;
     private LocalDate startDate;
     private String hrName;
+    private String hrEmail;
 }

@@ -1,6 +1,7 @@
 package com.hr.hrsystem.resource;
 
 import com.hr.hrsystem.dto.EmployeeDto;
+import com.hr.hrsystem.model.JobType;
 import com.hr.hrsystem.model.Person;
 import com.hr.hrsystem.model.Employee;
 import com.hr.hrsystem.service.GradeService;
@@ -45,6 +46,11 @@ public class HireEmployeeController {
         return new ResponseEntity<>(skillService.findAllNames(), HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/jobs", method = RequestMethod.GET)
+    public ResponseEntity<List<JobType>> findJobs() {
+        return new ResponseEntity<>(hireEmployeeService.getJobTypes(), HttpStatus.OK);
+    }
+
     @RequestMapping(value = "/hire", method = RequestMethod.POST,
             consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
             produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -82,6 +88,14 @@ public class HireEmployeeController {
     public ResponseEntity<Boolean> addPerson(@RequestBody Person testDTO) {
         log.info(testDTO.toString());
         boolean addPerson = personService.savePerson(testDTO);
+        return new ResponseEntity<>(addPerson, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/updateEmployeeJob", method = RequestMethod.POST,
+            consumes = MediaType.APPLICATION_JSON_UTF8_VALUE,
+            produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public ResponseEntity<Boolean> updateEmployee(@RequestBody EmployeeDto employee) {
+        boolean addPerson = hireEmployeeService.updateEmployee(employee);
         return new ResponseEntity<>(addPerson, HttpStatus.OK);
     }
 }

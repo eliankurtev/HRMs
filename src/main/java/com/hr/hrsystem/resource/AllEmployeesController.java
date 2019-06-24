@@ -46,4 +46,9 @@ public class AllEmployeesController {
         return new ResponseEntity<>(employees, HttpStatus.OK);
     }
 
+    @RequestMapping(value = "/benchEmployees", method = RequestMethod.GET)
+    public ResponseEntity<List<EmployeeDto>> getBenchEmployees(){
+        return new ResponseEntity<>(transformationService.getBenchEmployeeDtos(), HttpStatus.OK);
+    }
+
 }

@@ -34,6 +34,8 @@ public class EmployeeDto extends PersonDto {
 
     private String grade;
 
+    private String jobName;
+
     private String iban;
 
     @JsonFormat(with = JsonFormat.Feature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
@@ -46,7 +48,7 @@ public class EmployeeDto extends PersonDto {
     private EmployeeDto(String id, String firstName, String middleName, String lastName,
                         String gender, String address, Integer jobId,
                         String email, String startDate, Integer vacationDays,
-                        Integer workingHours, Integer workingDays, Float salary, String grade, List<String> skill, String iban) {
+                        Integer workingHours, Integer workingDays, Float salary, String grade, List<String> skill, String iban,String jobName) {
         super(id, firstName, middleName, lastName, gender, address);
         this.email = email;
         this.jobId = jobId;
@@ -57,6 +59,7 @@ public class EmployeeDto extends PersonDto {
         this.salary = salary;
         this.grade = grade;
         this.skill = skill;
+        this.jobName = jobName;
         this.iban = iban;
     }
 

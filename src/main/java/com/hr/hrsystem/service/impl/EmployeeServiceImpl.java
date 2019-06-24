@@ -71,8 +71,12 @@ public class EmployeeServiceImpl implements EmployeeService {
 
     @Override
     public List<Employee> findAllHrs() {
-        System.out.println(employeeRepository.findAllByJobNumber(JobType.HR).size());
         return employeeRepository.findAllByJobNumber(JobType.HR);
+    }
+
+    @Override
+    public List<Employee> findAllBenchEmployees() {
+        return employeeRepository.findAllByJobNumber(JobType.BENCH);
     }
 
     @Override

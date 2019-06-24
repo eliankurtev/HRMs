@@ -4,16 +4,22 @@ import com.hr.hrsystem.dto.ApplicationForVacationDto;
 import com.hr.hrsystem.dto.ContractDto;
 import com.hr.hrsystem.dto.EmployeeDto;
 import com.hr.hrsystem.model.*;
+import com.hr.hrsystem.repository.CompanyRepository;
 import com.hr.hrsystem.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.batch.BatchProperties;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
 @Service
 public class HireEmployeeServiceImpl implements HireEmployeeService {
+    @Autowired
+    CompanyRepository companyRepository;
+
     @Autowired
     private PersonService personService;
 
@@ -40,14 +46,20 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
                 .email(employeeDto.getEmail())
                 .build();
         boolean isSavedPerson = personService.savePerson(person);
+
+        JobType job = JobType.valueOf(employeeDto.getJobName());
+        System.out.println(job.getJobId());
+
+        Company c = companyRepository.findByEik((short) 5555);
+
         Employee employee = Employee.employeeBuilder()
                 .startDate(employeeDto.getStartDate())
                 .vacationDays(employeeDto.getVacationDays())
                 .workingDays(employeeDto.getWorkingDays())
                 .workingHours(employeeDto.getWorkingHours())
-                .jobNumber(JobType.findByJobId(employeeDto.getJobId()))
+                .jobNumber(job)
                 .build();
-
+        employee.setCompany(c);
         employee.setPerson(person);
 
         SecurityData securityData = new SecurityData();
@@ -134,6 +146,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
                 employee.setVacationDays(employeeDto.getVacationDays());
                 employee.setWorkingDays(employeeDto.getWorkingDays());
                 employee.setWorkingHours(employeeDto.getWorkingHours());
+                employee.setJobNumber(JobType.valueOf(employeeDto.getJobName()));
 
         employee.setPerson(person);
 
@@ -163,5 +176,10 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
     @Override
     public void updateEmployees(List<EmployeeDto> employeeDtos) {
         employeeDtos.forEach(this::updateEmployee);
+    }
+
+    @Override
+    public List<JobType> getJobTypes() {
+        return Arrays.asList(JobType.values());
     }
 }

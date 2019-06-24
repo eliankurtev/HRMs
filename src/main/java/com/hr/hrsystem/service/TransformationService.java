@@ -29,4 +29,6 @@ public interface TransformationService {
     List<EmployeeDto> getFiredEmployeeDtos();
 
     List<EmployeeDto> getHrEmployeeDtos();
+
+    List<EmployeeDto> getBenchEmployeeDtos();
 }
