@@ -14,6 +14,7 @@ import java.util.List;
 @Slf4j
 @RestController
 public class AllEmployeesController {
+
     @Autowired
     private TransformationService transformationService;
 
@@ -27,7 +28,7 @@ public class AllEmployeesController {
     }
 
     @RequestMapping(value = "/profile/{id}", method = RequestMethod.GET)
-    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable String id){
+    public ResponseEntity<EmployeeDto> getEmployee(@PathVariable String id) {
         log.info(transformationService.getById(id).toString());
         return new ResponseEntity<>(transformationService.getById(id), HttpStatus.OK);
     }

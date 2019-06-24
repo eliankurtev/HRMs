@@ -22,6 +22,10 @@ public interface TransformationService {
 
     Project dtoToProject(ProjectDto projectDto);
 
+    List<EmployeeDto> getEmployeeDtosByGrade(String grade);
+
+    List<EmployeeDto> getEmployeeDtosByPosition(String position);
+
     List<EmployeeDto> getFiredEmployeeDtos();
 
     List<EmployeeDto> getHrEmployeeDtos();

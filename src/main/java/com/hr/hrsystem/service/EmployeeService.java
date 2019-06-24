@@ -22,6 +22,10 @@ public interface EmployeeService {
     List<Employee> findAll();
 
 
+    List<Employee> findByGrade(String grade);
+
+    List<Employee> findAllByPosition(String position);
+
     List<Employee> findAllFired();
 
     Employee findOneById(String id);
