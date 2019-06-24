@@ -51,19 +51,23 @@ public class ExcelServiceImpl implements ExcelService {
         headerStyle.setFont(font);
 
         Cell headerCell = header.createCell(0);
-        headerCell.setCellValue("First Name");
+        headerCell.setCellValue("Име");
         headerCell.setCellStyle(headerStyle);
 
         headerCell = header.createCell(1);
-        headerCell.setCellValue("Middle Name");
+        headerCell.setCellValue("Бащино име");
         headerCell.setCellStyle(headerStyle);
 
         headerCell = header.createCell(2);
-        headerCell.setCellValue("Last Name");
+        headerCell.setCellValue("Фамилия");
         headerCell.setCellStyle(headerStyle);
 
         headerCell = header.createCell(3);
-        headerCell.setCellValue("Salary");
+        headerCell.setCellValue("Заплата");
+        headerCell.setCellStyle(headerStyle);
+
+        headerCell = header.createCell(3);
+        headerCell.setCellValue("IBAN");
         headerCell.setCellStyle(headerStyle);
 
         headerCell = header.createCell(4);
@@ -98,12 +102,13 @@ public class ExcelServiceImpl implements ExcelService {
             cell.setCellStyle(style);
 
             cell = row.createCell(4);
-            cell.setCellValue("Заплата за " + LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault()) + " " + LocalDate.now().getYear());
+            cell.setCellValue(e.getSecurityData().getIBAN());
             cell.setCellStyle(style);
 
-//            cell = row.createCell(4);
-//            cell.setCellValue(e.getSecurityData().getIBAN());
-//            cell.setCellStyle(style);
+            cell = row.createCell(5);
+            cell.setCellValue("Заплата за " + LocalDate.now().getMonth().getDisplayName(TextStyle.FULL, Locale.getDefault())
+                    + " " + LocalDate.now().getYear());
+            cell.setCellStyle(style);
 
             rowIndex++;
         }
