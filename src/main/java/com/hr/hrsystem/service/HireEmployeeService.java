@@ -8,7 +8,7 @@ import com.hr.hrsystem.model.JobType;
 import java.util.List;
 
 public interface HireEmployeeService {
-    boolean hireEmployee(EmployeeDto employeeDto);
+    Long hireEmployee(EmployeeDto employeeDto);
 
     boolean updateEmployee(EmployeeDto employeeDto);
 

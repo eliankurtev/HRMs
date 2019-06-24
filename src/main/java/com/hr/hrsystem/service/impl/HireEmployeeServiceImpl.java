@@ -36,7 +36,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
     private SkillService skillService;
 
     @Override
-    public boolean hireEmployee(EmployeeDto employeeDto) {
+    public Long hireEmployee(EmployeeDto employeeDto) {
         Person person = Person.builder()
                 .address(employeeDto.getAddress())
                 .firstName(employeeDto.getFirstName())
@@ -79,9 +79,9 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
         employee.setGrade(grade);
 
         Employee saveEmployee = employeeService.saveEmployee(employee);
-        boolean isSavedEmployee = Objects.nonNull(saveEmployee);
+        Long employeeId = saveEmployee.getId();
 
-        return isSavedEmployee && personId > 0 && isSavedSecurity;
+        return employeeId;
     }
 
     @Override

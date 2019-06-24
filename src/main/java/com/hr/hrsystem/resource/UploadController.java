@@ -1,5 +1,9 @@
 package com.hr.hrsystem.resource;
 
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -9,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +30,9 @@ public class UploadController {
     StorageService storageService;
 
     List<String> files = new ArrayList<>();
+
+    private final Path rootLocation = Paths.get("upload-dir/CV");
+    private final Path employeeLocation = Paths.get("upload-dir/employee");
 
     @PostMapping("/post")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
