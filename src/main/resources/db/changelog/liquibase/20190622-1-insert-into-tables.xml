@@ -36,7 +36,7 @@
         <insert schemaName="public" tableName="employee">
             <column name="id" value="1"/>
             <column name="vacation_days" value="21"/>
-            <column name="job_number" value="1"/>
+            <column name="job_number" value="2"/>
             <column name="working_hours" value="3"/>
             <column name="working_days" value="3"/>
             <column name="security_data_id" value="1"/>
@@ -80,7 +80,7 @@
         <insert schemaName="public" tableName="employee">
             <column name="id" value="2"/>
             <column name="vacation_days" value="20"/>
-            <column name="job_number" value="0"/>
+            <column name="job_number" value="2"/>
             <column name="working_hours" value="8"/>
             <column name="working_days" value="5"/>
             <column name="security_data_id" value="2"/>
@@ -123,7 +123,7 @@
         <insert schemaName="public" tableName="employee">
             <column name="id" value="3"/>
             <column name="vacation_days" value="19"/>
-            <column name="job_number" value="1"/>
+            <column name="job_number" value="2"/>
             <column name="working_hours" value="33"/>
             <column name="working_days" value="32"/>
             <column name="security_data_id" value="3"/>
@@ -182,7 +182,7 @@
         <insert schemaName="public" tableName="employee">
             <column name="id" value="5"/>
             <column name="vacation_days" value="18"/>
-            <column name="job_number" value="1"/>
+            <column name="job_number" value="2"/>
             <column name="working_hours" value="30"/>
             <column name="working_days" value="30"/>
             <column name="security_data_id" value="4"/>

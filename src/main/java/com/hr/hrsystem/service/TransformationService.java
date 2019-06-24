@@ -23,4 +23,6 @@ public interface TransformationService {
     Project dtoToProject(ProjectDto projectDto);
 
     List<EmployeeDto> getFiredEmployeeDtos();
+
+    List<EmployeeDto> getHrEmployeeDtos();
 }

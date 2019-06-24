@@ -14,4 +14,5 @@ import java.time.LocalDate;
 public class ApplicationForVacationFEDto {
     private String vacationDays;
     private LocalDate startDate;
+    private String hrName;
 }

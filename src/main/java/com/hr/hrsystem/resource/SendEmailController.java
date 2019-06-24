@@ -52,7 +52,7 @@ public class SendEmailController {
         // Enable the multipart flag!
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
-        helper.setTo("rkrumova97@gmail.com");
+        helper.setTo("humu@email-24x7.com");
         helper.setText("<html><body>Here is a cat picture! <img src='cid:id101'/><body></html>", true);
         helper.setSubject("Hi");
 

@@ -26,5 +26,7 @@ public interface EmployeeService {
 
     Employee findOneById(String id);
 
+    List<Employee> findAllHrs();
+
     Employee fireEmployee(String id);
 }

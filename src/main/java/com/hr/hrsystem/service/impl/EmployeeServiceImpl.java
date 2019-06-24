@@ -1,6 +1,7 @@
 package com.hr.hrsystem.service.impl;
 
 import com.hr.hrsystem.model.Employee;
+import com.hr.hrsystem.model.JobType;
 import com.hr.hrsystem.repository.EmployeeRepository;
 import com.hr.hrsystem.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,12 @@ public class EmployeeServiceImpl implements EmployeeService {
     @Override
     public Employee findOneById(String id) {
         return employeeRepository.findById(Long.parseLong(id)).isPresent() ? employeeRepository.findById(Long.parseLong(id)).get() : null;
+    }
+
+    @Override
+    public List<Employee> findAllHrs() {
+        System.out.println(employeeRepository.findAllByJobNumber(JobType.HR).size());
+        return employeeRepository.findAllByJobNumber(JobType.HR);
     }
 
     @Override
