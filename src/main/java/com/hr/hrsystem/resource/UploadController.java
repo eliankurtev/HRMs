@@ -24,11 +24,11 @@ public class UploadController {
     @Autowired
     StorageService storageService;
 
-    List<String> files = new ArrayList<String>();
+    List<String> files = new ArrayList<>();
 
     @PostMapping("/post")
     public ResponseEntity<String> handleFileUpload(@RequestParam("file") MultipartFile file) {
-        String message = "";
+        String message;
         try {
             storageService.store(file);
             files.add(file.getOriginalFilename());

@@ -62,6 +62,7 @@ public class TransformationServiceImpl implements TransformationService {
                 .startDate(employee.getStartDate().toString())
                 .jobId(employee.getJobNumber().getJobId())
                 .skill(employee.getSkills().stream().map(Skill::getName).collect(Collectors.toList()))
+                .iban(employee.getSecurityData().getIBAN())
                 .build();
     }
 
@@ -77,6 +78,26 @@ public class TransformationServiceImpl implements TransformationService {
     @Override
     public List<EmployeeDto> getEmployeeDtos() {
         List<Employee> employees = employeeService.findAll();
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+
+        employees.forEach(e -> employeeDtos.add(employeeToDto(e)));
+
+        return employeeDtos;
+    }
+
+    @Override
+    public List<EmployeeDto> getEmployeeDtosByGrade(String grade) {
+        List<Employee> employees = employeeService.findByGrade(grade);
+        List<EmployeeDto> employeeDtos = new ArrayList<>();
+
+        employees.forEach(e -> employeeDtos.add(employeeToDto(e)));
+
+        return employeeDtos;
+    }
+
+    @Override
+    public List<EmployeeDto> getEmployeeDtosByPosition(String position) {
+        List<Employee> employees = employeeService.findAllByPosition(position);
         List<EmployeeDto> employeeDtos = new ArrayList<>();
 
         employees.forEach(e -> employeeDtos.add(employeeToDto(e)));

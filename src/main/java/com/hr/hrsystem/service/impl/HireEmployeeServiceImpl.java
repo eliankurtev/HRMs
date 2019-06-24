@@ -50,6 +50,7 @@ public class HireEmployeeServiceImpl implements HireEmployeeService {
 
         SecurityData securityData = new SecurityData();
         securityData.setSalary(employeeDto.getSalary());
+        securityData.setIBAN(employeeDto.getIban());
         SecurityData save = securityDataService.save(securityData);
         boolean isSavedSecurity = Objects.nonNull(save);
 
