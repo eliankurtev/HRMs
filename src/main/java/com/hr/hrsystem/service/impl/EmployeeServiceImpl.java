@@ -3,21 +3,27 @@ package com.hr.hrsystem.service.impl;
 import com.hr.hrsystem.model.Employee;
 import com.hr.hrsystem.model.JobType;
 import com.hr.hrsystem.model.Grade;
+import com.hr.hrsystem.model.JobType;
 import com.hr.hrsystem.model.Position;
 import com.hr.hrsystem.repository.EmployeeRepository;
 import com.hr.hrsystem.service.EmployeeService;
 import com.hr.hrsystem.service.GradeService;
 import com.hr.hrsystem.service.PositionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
-@Service
-public class EmployeeServiceImpl implements EmployeeService {
+@Service(value = "userService")
+@Slf4j
+public class EmployeeServiceImpl implements EmployeeService, UserDetailsService {
     @Autowired
     private EmployeeRepository employeeRepository;
 
@@ -86,4 +92,30 @@ public class EmployeeServiceImpl implements EmployeeService {
         employee.setEndDate(LocalDate.now());
         return saveEmployee(employee);
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
+        Employee user = employeeRepository.findByUsername(s);
+        if(user == null){
+            throw new UsernameNotFoundException("Invalid username or password.");
+        }
+
+        List<GrantedAuthority> grantList = new ArrayList<>();
+        //TODO - HR Type
+        if (user.getJobNumber().equals(JobType.JAVA_SOFTWARE_DEVELOPER)) {
+            log.info("HR");
+            String role = "ADMIN";
+            GrantedAuthority authority = new SimpleGrantedAuthority(role);
+            grantList.add(authority);
+        } else {
+            log.info("USER");
+            String role = "USER";
+            GrantedAuthority authority = new SimpleGrantedAuthority(role);
+            grantList.add(authority);
+        }
+
+
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), grantList);
+    }
+
 }

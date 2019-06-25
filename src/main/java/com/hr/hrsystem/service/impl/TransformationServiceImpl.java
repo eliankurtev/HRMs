@@ -60,7 +60,7 @@ public class TransformationServiceImpl implements TransformationService {
                 .workingDays(employee.getWorkingDays())
                 .vacationDays(employee.getVacationDays())
                 .startDate(employee.getStartDate().toString())
-                .jobId(employee.getJobNumber().getJobId())
+                .jobName(employee.getJobNumber().toString())
                 .skill(employee.getSkills().stream().map(Skill::getName).collect(Collectors.toList()))
                 .iban(employee.getSecurityData().getIBAN())
                 .build();

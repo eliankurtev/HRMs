@@ -16,5 +16,5 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
     List<Employee> findAllByIsFiredFalseOrIsFiredIsNull();
     List<Employee> findAllByGrade(Grade grade);
     List<Employee> findAllByPositions(List<Position> positions);
-
+    Employee findByUsername(String username);
 }

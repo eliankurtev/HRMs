@@ -24,8 +24,6 @@ public class EmployeeDto extends PersonDto {
 
     private Integer vacationDays;
 
-    private Integer jobId;
-
     private Integer workingHours;
 
     private Integer workingDays;
@@ -46,12 +44,11 @@ public class EmployeeDto extends PersonDto {
 
     @Builder(builderMethodName = "employeeDtoBuilder")
     private EmployeeDto(String id, String firstName, String middleName, String lastName,
-                        String gender, String address, Integer jobId,
+                        String gender, String address, String jobId,
                         String email, String startDate, Integer vacationDays,
                         Integer workingHours, Integer workingDays, Float salary, String grade, List<String> skill, String iban,String jobName) {
         super(id, firstName, middleName, lastName, gender, address);
         this.email = email;
-        this.jobId = jobId;
         this.startDate = startDate;
         this.vacationDays = vacationDays;
         this.workingDays = workingDays;

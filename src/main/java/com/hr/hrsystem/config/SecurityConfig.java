@@ -18,9 +18,9 @@ import javax.annotation.Resource;
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-//
-//    @Resource(name = "userService")
-//    private UserDetailsService userDetailsService;
+
+    @Resource(name = "userService")
+    private UserDetailsService userDetailsService;
 
     @Override
     @Bean
@@ -30,20 +30,22 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void globalUserDetails(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication()
-                .withUser("john").password("123").roles("ADMIN");
+        auth.userDetailsService(userDetailsService)
+                .passwordEncoder(encoder());
     }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/login").permitAll()
-                .anyRequest().authenticated()
-                .and().csrf().disable();
+        http
+                .csrf().disable()
+                .anonymous().disable()
+                .authorizeRequests()
+                .antMatchers("/api/**").permitAll()
+                .and().logout().logoutSuccessUrl("/").permitAll();
     }
 
-//    @Bean
-//    public BCryptPasswordEncoder encoder(){
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public BCryptPasswordEncoder encoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
-
